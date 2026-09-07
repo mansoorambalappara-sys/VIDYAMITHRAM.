@@ -48,53 +48,60 @@
 
         .user-status { font-family: var(--font-card); font-size: 14px; background: rgba(255,255,255,0.25); backdrop-filter: blur(5px); padding: 5px 16px; border-radius: 25px; display: inline-block; border: 1px solid rgba(255,255,255,0.4); font-weight: 600; }
 
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 25px 20px; flex-grow: 1; }
+        /* Grid ബട്ടണുകളുടെ ഇടവേള കുറച്ചു */
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px 15px; flex-grow: 1; }
 
+        /* 3D കാർഡുകൾ ഒതുക്കി ചെറുതാക്കി */
         .card-3d {
-            border-radius: 25px; padding: 20px 12px; text-align: center; cursor: pointer; color: white; font-family: var(--font-subhead); font-weight: 700; font-size: 17px; transition: all 0.2s ease; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; user-select: none;
+            border-radius: 20px; padding: 15px 10px; text-align: center; cursor: pointer; color: white; 
+            font-family: var(--font-subhead); font-weight: 700; font-size: 15px; 
+            transition: all 0.2s ease; position: relative; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; height: 115px; user-select: none;
         }
         
-        .bg-1 { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); box-shadow: 0 8px 0 #d64d63, 0 12px 18px rgba(255, 117, 140, 0.4); }
-        .bg-2 { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); box-shadow: 0 8px 0 #4a0cb3, 0 12px 18px rgba(37, 117, 252, 0.4); }
-        .bg-3 { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); box-shadow: 0 8px 0 #0d7a71, 0 12px 18px rgba(56, 239, 125, 0.3); }
-        .bg-4 { background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%); box-shadow: 0 8px 0 #cc6b3d, 0 12px 18px rgba(255, 94, 98, 0.35); }
-        .bg-5 { background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%); box-shadow: 0 8px 0 #681ebb, 0 12px 18px rgba(142, 45, 226, 0.35); }
-        .bg-6 { background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); box-shadow: 0 8px 0 #008777, 0 12px 18px rgba(0, 176, 155, 0.35); }
-        .bg-7 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); box-shadow: 0 8px 0 #e5896e, 0 12px 18px rgba(253, 160, 133, 0.4); }
-        .bg-8 { background: linear-gradient(135deg, #36D1DC 0%, #5B86E5 100%); box-shadow: 0 8px 0 #289da6, 0 12px 18px rgba(54, 209, 220, 0.4); }
-        .bg-9 { background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); box-shadow: 0 8px 0 #c43922, 0 12px 18px rgba(255, 81, 47, 0.4); }
-        .bg-10 { background: linear-gradient(135deg, #FDC830 0%, #F37335 100%); box-shadow: 0 8px 0 #c79e26, 0 12px 18px rgba(253, 200, 48, 0.4); }
-        /* പുതിയ ക്ലാസുകൾക്കായുള്ള നിറങ്ങൾ */
-        .bg-11 { background: linear-gradient(135deg, #b224ef 0%, #7579ff 100%); box-shadow: 0 8px 0 #851bb3, 0 12px 18px rgba(178, 36, 239, 0.4); }
-        .bg-12 { background: linear-gradient(135deg, #f12711 0%, #f5af19 100%); box-shadow: 0 8px 0 #b51c0c, 0 12px 18px rgba(241, 39, 17, 0.4); }
-        .bg-13 { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); box-shadow: 0 8px 0 #0095bf, 0 12px 18px rgba(0, 198, 255, 0.4); }
-        .bg-14 { background: linear-gradient(135deg, #1D976C 0%, #93F9B9 100%); box-shadow: 0 8px 0 #157351, 0 12px 18px rgba(29, 151, 108, 0.4); }
+        .bg-1 { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); box-shadow: 0 8px 0 #d64d63, 0 10px 15px rgba(255, 117, 140, 0.4); }
+        .bg-2 { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); box-shadow: 0 8px 0 #4a0cb3, 0 10px 15px rgba(37, 117, 252, 0.4); }
+        .bg-3 { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); box-shadow: 0 8px 0 #0d7a71, 0 10px 15px rgba(56, 239, 125, 0.3); }
+        .bg-4 { background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%); box-shadow: 0 8px 0 #cc6b3d, 0 10px 15px rgba(255, 94, 98, 0.35); }
+        .bg-5 { background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%); box-shadow: 0 8px 0 #681ebb, 0 10px 15px rgba(142, 45, 226, 0.35); }
+        .bg-6 { background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); box-shadow: 0 8px 0 #008777, 0 10px 15px rgba(0, 176, 155, 0.35); }
+        .bg-7 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); box-shadow: 0 8px 0 #e5896e, 0 10px 15px rgba(253, 160, 133, 0.4); }
+        .bg-8 { background: linear-gradient(135deg, #36D1DC 0%, #5B86E5 100%); box-shadow: 0 8px 0 #289da6, 0 10px 15px rgba(54, 209, 220, 0.4); }
+        .bg-9 { background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); box-shadow: 0 8px 0 #c43922, 0 10px 15px rgba(255, 81, 47, 0.4); }
+        .bg-10 { background: linear-gradient(135deg, #FDC830 0%, #F37335 100%); box-shadow: 0 8px 0 #c79e26, 0 10px 15px rgba(253, 200, 48, 0.4); }
+        .bg-11 { background: linear-gradient(135deg, #b224ef 0%, #7579ff 100%); box-shadow: 0 8px 0 #851bb3, 0 10px 15px rgba(178, 36, 239, 0.4); }
+        .bg-12 { background: linear-gradient(135deg, #f12711 0%, #f5af19 100%); box-shadow: 0 8px 0 #b51c0c, 0 10px 15px rgba(241, 39, 17, 0.4); }
+        .bg-13 { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); box-shadow: 0 8px 0 #0095bf, 0 10px 15px rgba(0, 198, 255, 0.4); }
+        .bg-14 { background: linear-gradient(135deg, #1D976C 0%, #93F9B9 100%); box-shadow: 0 8px 0 #157351, 0 10px 15px rgba(29, 151, 108, 0.4); }
 
         .card-3d:active { transform: translateY(6px); box-shadow: 0 2px 0 #aaa, 0 4px 8px rgba(0,0,0,0.15); }
-        .card-icon { font-size: 42px; margin-bottom: 12px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25)); }
+        
+        /* ഐക്കണുകളുടെ വലിപ്പം ഒതുക്കി */
+        .card-icon { font-size: 34px; margin-bottom: 8px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25)); }
 
         .page { display: none; padding: 20px; animation: fadeIn 0.3s ease-out; flex-grow: 1; }
         .page-title { font-family: var(--font-head); font-size: 24px; color: var(--primary-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 800; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* സാധാരണ ബട്ടണുകളുടെ വലിപ്പവും കുറച്ചു */
         .btn {
-            background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 40px; 
-            font-family: var(--font-body); font-size: 16px; font-weight: 700; cursor: pointer; width: 100%;
-            box-shadow: 0 7px 0 var(--primary-dark), 0 12px 20px rgba(92, 107, 192, 0.4);
+            background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 30px; 
+            font-family: var(--font-body); font-size: 15px; font-weight: 700; cursor: pointer; width: 100%;
+            box-shadow: 0 6px 0 var(--primary-dark), 0 10px 15px rgba(92, 107, 192, 0.4);
             transition: all 0.15s ease; display: inline-flex; justify-content: center; align-items: center; gap: 8px;
         }
-        .btn:active { transform: translateY(7px); box-shadow: 0 0px 0 var(--primary-dark), 0 4px 8px rgba(92, 107, 192, 0.4); margin-bottom: 7px; }
+        .btn:active { transform: translateY(6px); box-shadow: 0 0px 0 var(--primary-dark), 0 4px 8px rgba(92, 107, 192, 0.4); margin-bottom: 6px; }
 
-        .btn-green { background: var(--success); box-shadow: 0 7px 0 var(--success-dark), 0 12px 20px rgba(46, 125, 50, 0.4); }
+        .btn-green { background: var(--success); box-shadow: 0 6px 0 var(--success-dark), 0 10px 15px rgba(46, 125, 50, 0.4); }
         .btn-green:active { box-shadow: 0 0px 0 var(--success-dark), 0 4px 8px rgba(46, 125, 50, 0.4); }
 
         .btn-back {
-            background: #eceff1; color: #37474f; margin-bottom: 20px; width: auto; padding: 10px 20px;
-            border-radius: 30px; font-family: var(--font-body); font-size: 15px; font-weight: 700; border: none; cursor: pointer;
-            box-shadow: 0 5px 0 #cfd8dc, 0 8px 15px rgba(0,0,0,0.1); transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 6px;
+            background: #eceff1; color: #37474f; margin-bottom: 20px; width: auto; padding: 8px 16px;
+            border-radius: 25px; font-family: var(--font-body); font-size: 14px; font-weight: 700; border: none; cursor: pointer;
+            box-shadow: 0 4px 0 #cfd8dc, 0 6px 10px rgba(0,0,0,0.1); transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 6px;
         }
-        .btn-back:active { transform: translateY(5px); box-shadow: 0 0px 0 #cfd8dc, 0 3px 6px rgba(0,0,0,0.1); margin-bottom: 25px;}
+        .btn-back:active { transform: translateY(4px); box-shadow: 0 0px 0 #cfd8dc, 0 3px 6px rgba(0,0,0,0.1); margin-bottom: 24px;}
 
         .auth-container { padding: 30px 25px; display: none; }
         .auth-title { font-family: var(--font-head); font-size: 26px; text-align: center; color: var(--primary-dark); margin-bottom: 25px; font-weight: 800;}
@@ -106,25 +113,25 @@
 
         .list-item { 
             background: linear-gradient(180deg, #ffffff 0%, #f4f6f9 100%); 
-            padding: 24px 20px; 
+            padding: 20px 18px; /* ലേഔട്ട് കുറച്ചു കൂടെ ഒതുക്കി */
             border-radius: 24px; 
-            margin-bottom: 25px; 
+            margin-bottom: 20px; 
             border: 2px solid #e0e6ed; 
             border-bottom: 8px solid var(--primary); 
-            box-shadow: 0 10px 20px rgba(92, 107, 192, 0.18), inset 0 4px 0 #ffffff; 
+            box-shadow: 0 8px 15px rgba(92, 107, 192, 0.18), inset 0 4px 0 #ffffff; 
             transition: all 0.2s ease; 
             position: relative; 
         }
-        .list-item:active { transform: translateY(4px); border-bottom: 4px solid var(--primary); margin-bottom: 29px; }
-        .list-item h4 { font-family: var(--font-head); font-size: 21px; margin-bottom: 12px; color: var(--primary-dark); line-height: 1.4; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); font-weight: 700; }
+        .list-item:active { transform: translateY(4px); border-bottom: 4px solid var(--primary); margin-bottom: 24px; }
+        .list-item h4 { font-family: var(--font-head); font-size: 19px; margin-bottom: 10px; color: var(--primary-dark); line-height: 1.4; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); font-weight: 700; }
         
         /* പുതിയ സൈഡ്-ബൈ-സൈഡ് ലേഔട്ട് (Side-by-Side Layout) */
         .list-flex-container { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
         .list-text-content { flex: 1; text-align: left; }
         .list-thumb-wrapper { flex-shrink: 0; }
         .list-thumbnail { 
-            width: 110px; height: 110px; object-fit: cover; 
-            border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+            width: 90px; height: 90px; object-fit: cover; 
+            border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
             cursor: zoom-in; transition: transform 0.2s ease; border: 2px solid #fff; 
         }
         .list-thumbnail:active { transform: scale(0.95); }
@@ -257,22 +264,33 @@
             <div class="page-title"><i class="fas fa-file-alt"></i> ക്ലാസ് തിരഞ്ഞെടുക്കുക</div>
         </div>
         <div class="grid-container" style="padding-top: 0;">
-            <div class="card-3d bg-13" onclick="openSection('content-page', 'std1')">
+            <div class="card-3d bg-13" onclick="openSubjects(1)">
                 <div class="card-icon"><i class="fas fa-child"></i></div>
                 <div>ഒന്നാം ക്ലാസ്</div>
             </div>
-            <div class="card-3d bg-14" onclick="openSection('content-page', 'std2')">
+            <div class="card-3d bg-14" onclick="openSubjects(2)">
                 <div class="card-icon"><i class="fas fa-book"></i></div>
                 <div>രണ്ടാം ക്ലാസ്</div>
             </div>
-            <div class="card-3d bg-1" onclick="openSection('content-page', 'std3')">
+            <div class="card-3d bg-1" onclick="openSubjects(3)">
                 <div class="card-icon"><i class="fas fa-pencil-alt"></i></div>
                 <div>മൂന്നാം ക്ലാസ്</div>
             </div>
-            <div class="card-3d bg-2" onclick="openSection('content-page', 'std4')">
+            <div class="card-3d bg-2" onclick="openSubjects(4)">
                 <div class="card-icon"><i class="fas fa-school"></i></div>
                 <div>നാലാം ക്ലാസ്</div>
             </div>
+        </div>
+    </div>
+
+    <!-- Subject Selection Sub-page -->
+    <div id="subject-page" class="page" style="display: none; padding: 0;">
+        <div style="padding: 20px;">
+            <button class="btn-back" onclick="goBackToClasses()"><i class="fas fa-arrow-left"></i> ക്ലാസുകൾ</button>
+            <div class="page-title" id="subject-page-title"><i class="fas fa-book"></i> വിഷയം തിരഞ്ഞെടുക്കുക</div>
+        </div>
+        <div class="grid-container" id="subject-grid-container" style="padding-top: 0;">
+            <!-- Subjects will be injected here -->
         </div>
     </div>
 
@@ -327,9 +345,13 @@
     // ====================================================================
 
     let currentCategory = '';
+    let currentClassLevel = 1;
     let currentUser = null;
     let usersDB = JSON.parse(localStorage.getItem('usersDB')) || [];
+    let savedLogo = localStorage.getItem('schoolLogoUrl');
     let sheetData = []; 
+
+    if(savedLogo) document.getElementById('schoolLogo').src = savedLogo;
 
     // iOS Detection
     function checkIOS() {
@@ -365,6 +387,8 @@
         document.getElementById('signup-page').style.display = type === 'signup' ? 'block' : 'none';
         document.getElementById('home-page').style.display = 'none';
         document.getElementById('content-page').style.display = 'none';
+        document.getElementById('qpaper-page').style.display = 'none';
+        document.getElementById('subject-page').style.display = 'none';
     }
 
     function login() {
@@ -410,7 +434,7 @@
         document.getElementById('home-page').style.display = 'block';
         document.getElementById('userStatus').innerHTML = `👋 സ്വാഗതം, ${currentUser.firstName}`;
         document.getElementById('logoutBtn').style.display = 'inline-block';
-        
+
         if(APP_SCRIPT_URL && APP_SCRIPT_URL !== "ഇവിടെ_ലിങ്ക്_പേസ്റ്റ്_ചെയ്യുക") { 
             fetchFromSheet(); 
         }
@@ -419,13 +443,53 @@
     function openQPaperPage() {
         document.getElementById('home-page').style.display = 'none';
         document.getElementById('content-page').style.display = 'none';
+        document.getElementById('subject-page').style.display = 'none';
+        document.getElementById('qpaper-page').style.display = 'block';
+    }
+
+    function openSubjects(cls) {
+        currentClassLevel = cls;
+        document.getElementById('qpaper-page').style.display = 'none';
+        document.getElementById('subject-page').style.display = 'block';
+
+        let titleMap = {1: 'ഒന്നാം', 2: 'രണ്ടാം', 3: 'മൂന്നാം', 4: 'നാലാം'};
+        document.getElementById('subject-page-title').innerHTML = `<i class="fas fa-book"></i> ${titleMap[cls]} ക്ലാസ് - വിഷയങ്ങൾ`;
+
+        let html = '';
+        if(cls === 1 || cls === 2) {
+            html += createSubButton('bg-13', `std${cls}_eng`, 'fas fa-language', 'ഇംഗ്ലീഷ്');
+            html += createSubButton('bg-10', `std${cls}_ara`, 'fas fa-globe-asia', 'അറബിക്');
+            html += createSubButton('bg-1', `std${cls}_int1`, 'fas fa-puzzle-piece', 'ഇന്റഗ്രേഷൻ 1');
+            html += createSubButton('bg-2', `std${cls}_int2`, 'fas fa-puzzle-piece', 'ഇന്റഗ്രേഷൻ 2');
+            html += createSubButton('bg-3', `std${cls}_int3`, 'fas fa-puzzle-piece', 'ഇന്റഗ്രേഷൻ 3');
+        } else if(cls === 3 || cls === 4) {
+            html += createSubButton('bg-9', `std${cls}_mal`, 'fas fa-book-reader', 'മലയാളം');
+            html += createSubButton('bg-13', `std${cls}_eng`, 'fas fa-language', 'ഇംഗ്ലീഷ്');
+            html += createSubButton('bg-10', `std${cls}_ara`, 'fas fa-globe-asia', 'അറബിക്');
+            html += createSubButton('bg-12', `std${cls}_mat`, 'fas fa-calculator', 'ഗണിതം');
+            html += createSubButton('bg-14', `std${cls}_evs`, 'fas fa-leaf', 'പരിസരപഠനം (EVS)');
+        }
+        document.getElementById('subject-grid-container').innerHTML = html;
+    }
+
+    function createSubButton(bgClass, category, icon, title) {
+        return `
+            <div class="card-3d ${bgClass}" onclick="openSection('content-page', '${category}')">
+                <div class="card-icon"><i class="${icon}"></i></div>
+                <div>${title}</div>
+            </div>
+        `;
+    }
+
+    function goBackToClasses() {
+        document.getElementById('subject-page').style.display = 'none';
         document.getElementById('qpaper-page').style.display = 'block';
     }
 
     function goBack() {
-        if(['std1', 'std2', 'std3', 'std4'].includes(currentCategory)) {
+        if(currentCategory.startsWith('std')) {
             document.getElementById('content-page').style.display = 'none';
-            document.getElementById('qpaper-page').style.display = 'block';
+            document.getElementById('subject-page').style.display = 'block';
         } else {
             goHome();
         }
@@ -433,7 +497,8 @@
 
     function goHome() {
         document.getElementById('content-page').style.display = 'none';
-        if(document.getElementById('qpaper-page')) document.getElementById('qpaper-page').style.display = 'none';
+        document.getElementById('qpaper-page').style.display = 'none';
+        document.getElementById('subject-page').style.display = 'none';
         document.getElementById('home-page').style.display = 'block';
     }
 
@@ -445,7 +510,6 @@
         return link; 
     }
 
-    // ഫോട്ടോ ആവാത്ത ലിങ്കുകൾക്ക് ബട്ടൺ നൽകാനുള്ള സ്മാർട്ട് സംവിധാനം
     function handleImageError(imgElement, originalUrl, category) {
         let btnText = '<i class="fas fa-external-link-alt"></i> തുറന്നു കാണുക / വായിക്കുക';
         if(['smart_english', 'easy_malayalam', 'arabic'].includes(category)) {
@@ -455,7 +519,7 @@
         let flexContainer = imgElement.closest('.list-flex-container');
         if(flexContainer) {
             let textDiv = flexContainer.querySelector('.list-text-content');
-            imgElement.parentNode.remove(); // ചിത്രത്തിന്റെ സ്ഥലം ഒഴിവാക്കുന്നു
+            imgElement.parentNode.remove();
             let btnDiv = document.createElement('div');
             btnDiv.innerHTML = `<a href="${originalUrl}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 10px; font-size: 13px; padding: 10px 15px; width:auto;">${btnText}</button></a>`;
             textDiv.appendChild(btnDiv);
@@ -472,27 +536,37 @@
     function openSection(pageId, category) {
         currentCategory = category;
         document.getElementById('home-page').style.display = 'none';
-        if(document.getElementById('qpaper-page')) document.getElementById('qpaper-page').style.display = 'none';
+        document.getElementById('qpaper-page').style.display = 'none';
+        document.getElementById('subject-page').style.display = 'none';
         document.getElementById(pageId).style.display = 'block';
         
-        let titles = {
-            'gallery': '<i class="fas fa-images"></i> ഫോട്ടോ ഗാലറി',
-            'news': '<i class="fas fa-newspaper"></i> സ്കൂൾ വാർത്തകൾ',
-            'salabham': '<i class="fas fa-book-reader"></i> ശലഭം പത്രം',
-            'shishuvani': '<i class="fas fa-microphone-alt"></i> ശിശുവാണി',
-            'lss': '<i class="fas fa-graduation-cap"></i> LSS പരിശീലനം',
-            'chodyamazha': '<i class="fas fa-question-circle"></i> ചോദ്യമഴ',
-            'smart_english': '<i class="fas fa-spell-check"></i> സ്മാർട്ട് ഇംഗ്ലീഷ്',
-            'easy_malayalam': '<i class="fas fa-book-reader"></i> ഈസി മലയാളം',
-            'arabic': '<i class="fas fa-globe-asia"></i> ബഹ്ജത്തുൽ അറബിയ്യ',
-            'winners': '<i class="fas fa-trophy"></i> മത്സരങ്ങളിലെ വിജയികൾ',
-            'online_quiz': '<i class="fas fa-laptop-code"></i> ഓൺലൈൻ ക്വിസ്',
-            'std1': '<i class="fas fa-file-pdf"></i> ഒന്നാം ക്ലാസ് ചോദ്യങ്ങൾ',
-            'std2': '<i class="fas fa-file-pdf"></i> രണ്ടാം ക്ലാസ് ചോദ്യങ്ങൾ',
-            'std3': '<i class="fas fa-file-pdf"></i> മൂന്നാം ക്ലാസ് ചോദ്യങ്ങൾ',
-            'std4': '<i class="fas fa-file-pdf"></i> നാലാം ക്ലാസ് ചോദ്യങ്ങൾ'
-        };
-        document.getElementById('content-title').innerHTML = titles[category];
+        let contentTitle = '';
+        if(category.startsWith('std')) {
+            let clsMap = {'std1': 'ഒന്നാം ക്ലാസ്', 'std2': 'രണ്ടാം ക്ലാസ്', 'std3': 'മൂന്നാം ക്ലാസ്', 'std4': 'നാലാം ക്ലാസ്'};
+            let subMap = {
+                'eng': 'ഇംഗ്ലീഷ്', 'ara': 'അറബിക്', 'int1': 'ഇന്റഗ്രേഷൻ 1', 'int2': 'ഇന്റഗ്രേഷൻ 2', 'int3': 'ഇന്റഗ്രേഷൻ 3',
+                'mal': 'മലയാളം', 'mat': 'ഗണിതം', 'evs': 'പരിസരപഠനം'
+            };
+            let parts = category.split('_');
+            contentTitle = `<i class="fas fa-file-pdf"></i> ${clsMap[parts[0]]} - ${subMap[parts[1]]}`;
+        } else {
+            let titles = {
+                'gallery': '<i class="fas fa-images"></i> ഫോട്ടോ ഗാലറി',
+                'news': '<i class="fas fa-newspaper"></i> സ്കൂൾ വാർത്തകൾ',
+                'salabham': '<i class="fas fa-book-reader"></i> ശലഭം പത്രം',
+                'shishuvani': '<i class="fas fa-microphone-alt"></i> ശിശുവാണി',
+                'lss': '<i class="fas fa-graduation-cap"></i> LSS പരിശീലനം',
+                'chodyamazha': '<i class="fas fa-question-circle"></i> ചോദ്യമഴ',
+                'smart_english': '<i class="fas fa-spell-check"></i> സ്മാർട്ട് ഇംഗ്ലീഷ്',
+                'easy_malayalam': '<i class="fas fa-book-reader"></i> ഈസി മലയാളം',
+                'arabic': '<i class="fas fa-globe-asia"></i> ബഹ്ജത്തുൽ അറബിയ്യ',
+                'winners': '<i class="fas fa-trophy"></i> മത്സരങ്ങളിലെ വിജയികൾ',
+                'online_quiz': '<i class="fas fa-laptop-code"></i> ഓൺലൈൻ ക്വിസ്'
+            };
+            contentTitle = titles[category];
+        }
+        
+        document.getElementById('content-title').innerHTML = contentTitle;
         renderCategoryContent(category);
     }
 
@@ -507,7 +581,7 @@
         container.innerHTML = '';
 
         if(!APP_SCRIPT_URL || APP_SCRIPT_URL === "ഇവിടെ_ലിങ്ക്_പേസ്റ്റ്_ചെയ്യുക") {
-            container.innerHTML = `<div style="text-align:center; padding: 20px; color: #d32f2f; background: #ffebee; border-radius: 15px; margin-top: 15px; line-height: 1.6;"><b><i class="fas fa-exclamation-triangle"></i> ഗൂഗിൾ ഷീറ്റ് ലിങ്ക് നൽകിയിട്ടില്ല!</b><br><span style="font-size: 14px;">HTML കോഡിൽ 'APP_SCRIPT_URL' എന്ന ഭാഗത്ത് നിങ്ങളുടെ ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് ലിങ്ക് നൽകിയ ശേഷം ഗിറ്റ്ഹബ്ബിൽ അപ്‌ലോഡ് ചെയ്യുക.</span></div>`;
+            container.innerHTML = `<div style="text-align:center; padding: 20px; color: #d32f2f; background: #ffebee; border-radius: 15px; margin-top: 15px; line-height: 1.6;"><b><i class="fas fa-exclamation-triangle"></i> ഗൂഗിൾ ഷീറ്റ് ലിങ്ക് നൽകിയിട്ടില്ല!</b><br><span style="font-size: 14px;">HTML കോഡിൽ 'APP_SCRIPT_URL' എന്ന ഭാഗത്ത് നിങ്ങളുടെ ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് ലിങ്ക് നൽകുക.</span></div>`;
             return;
         }
 
@@ -539,12 +613,9 @@
             let actionHTML = '';
             let gameBtnHTML = '';
             
-            // ഗെയിം ലിങ്ക് നൽകിയിട്ടുണ്ടെങ്കിൽ (iframe or button)
             if(item.gamelink && item.gamelink.trim() !== '') {
-                // ചെക്ക് ചെയ്യുക, ഇത് നേരിട്ട് കളിക്കാവുന്ന ഗെയിം ലിങ്ക് ആണോ അതോ iframe embed ലിങ്ക് ആണോ എന്ന്
                 let gLink = item.gamelink.trim();
                 
-                // .html ഫയൽ ആണെങ്കിലോ അല്ലെങ്കിൽ embed link ആണെങ്കിലോ ആപ്പിൽ തന്നെ (iframe) കളിക്കാൻ പാകത്തിൽ
                 if(gLink.endsWith('.html') || gLink.includes('wordwall.net/embed') || gLink.includes('scratch.mit.edu/projects/') || gLink.includes('h5p')) {
                     gameBtnHTML = `
                         <div style="margin-top: 15px; width: 100%; border-radius: 12px; overflow: hidden; border: 2px solid #ff9800; box-shadow: 0 4px 8px rgba(255, 152, 0, 0.2);">
@@ -555,14 +626,11 @@
                         </div>
                     `;
                 } else {
-                    // സാധാരണ ലിങ്ക് ആണെങ്കിൽ ബട്ടൺ കാണിക്കുക
                     gameBtnHTML = `<div style="margin-top: 15px;"><a href="${gLink}" target="_blank" style="text-decoration:none;"><button class="btn" style="background: #ff9800; box-shadow: 0 5px 0 #e65100; font-size: 15px; padding: 12px 18px; width:100%;"><i class="fas fa-gamepad"></i> ഇന്ററാക്ടീവ് ഗെയിം കളിക്കുക (പുതിയ പേജിൽ)</button></a></div>`;
                 }
             }
             
-            // പ്രധാന ഫോട്ടോ/ലിങ്ക് നൽകാൻ
             if(item.link && item.link.trim() !== '') {
-                // ഗാലറിക്കും വിജയികളുടെ പോസ്റ്ററിനും ചിത്രമായി കാണിക്കുക
                 if(['gallery', 'news', 'winners', 'smart_english', 'easy_malayalam', 'arabic'].includes(category)) {
                     let imgSrc = formatDriveImage(item.link);
                     thumbHTML = `<img src="${imgSrc}" class="list-thumbnail" alt="Image" onclick="openLightbox('${imgSrc}')" onerror="handleImageError(this, '${item.link}', '${category}')">`;
@@ -570,12 +638,10 @@
                     actionHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 10px; font-size: 13px; padding: 10px 15px; width:auto;"><i class="fas fa-play-circle"></i> പ്ലേ ചെയ്യുക / കാണുക</button></a>`;
                 } else if(category === 'salabham') {
                     actionHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 10px; font-size: 13px; padding: 10px 15px; width:auto;"><i class="fas fa-book-open"></i> പത്രം വായിക്കുക</button></a>`;
-                } else if(category === 'chodyamazha') {
+                } else if(category === 'chodyamazha' || category === 'online_quiz') {
                     actionHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 10px; font-size: 13px; padding: 10px 15px; width:auto;"><i class="fas fa-pen-alt"></i> ക്വിസ് ആരംഭിക്കുക</button></a>`;
-                } else if(['std1', 'std2', 'std3', 'std4'].includes(category)) {
+                } else if(category.startsWith('std')) {
                     actionHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 10px; font-size: 13px; padding: 10px 15px; width:auto;"><i class="fas fa-file-pdf"></i> ചോദ്യപ്പേപ്പർ തുറക്കുക</button></a>`;
-                } else if(category === 'online_quiz') {
-                    actionHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 10px; font-size: 13px; padding: 10px 15px; width:auto;"><i class="fas fa-laptop-code"></i> ക്വിസ് ആരംഭിക്കുക</button></a>`;
                 } else {
                     actionHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 10px; font-size: 13px; padding: 10px 15px; width:auto;"><i class="fas fa-external-link-alt"></i> കാണുക / വായിക്കുക</button></a>`;
                 }
