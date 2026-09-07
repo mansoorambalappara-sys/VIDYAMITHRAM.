@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>വിദ്യാമിത്രം - GLPS Mundekkarad App</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@400;600;700;800&family=Chilanka&family=Gayathri:wght@400;700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --header-bg: linear-gradient(135deg, #4a00e0 0%, #8e2de2 100%);
+            --primary: #5c6bc0;
+            --primary-dark: #3949ab;
+            --accent: #ff4081;
+            --success: #2e7d32;
+            --success-dark: #1b5e20;
+            --warning: #f57c00;
+            --font-head: 'Gayathri', 'Anek Malayalam', sans-serif;
+            --font-subhead: 'Anek Malayalam', sans-serif;
+            --font-body: 'Noto Sans Malayalam', sans-serif;
+            --font-card: 'Manjari', sans-serif;
+            --font-fancy: 'Chilanka', cursive;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg-gradient); min-height: 100vh; display: flex; justify-content: center; font-family: var(--font-body); color: #2c3e50; -webkit-tap-highlight-color: transparent; }
+        .app-container { width: 100%; max-width: 480px; background: #ffffff; min-height: 100vh; box-shadow: 0 10px 30px rgba(0,0,0,0.15); position: relative; overflow-x: hidden; display: flex; flex-direction: column; }
+
+        .header {
+            background: var(--header-bg); color: white; padding: 25px 15px 20px; text-align: center; border-bottom-left-radius: 35px; border-bottom-right-radius: 35px; box-shadow: 0 8px 25px rgba(74, 0, 224, 0.35); position: relative; z-index: 10;
+        }
+        
+        .vidyamithram-title {
+            font-family: var(--font-head); font-size: 32px; font-weight: 800; color: #fff;
+            text-shadow: 2px 4px 0px #311b92, 0px 8px 15px rgba(0,0,0,0.4); margin-bottom: 15px; letter-spacing: 1px;
+        }
+
+        .logo-container { width: 100px; height: 100px; background: white; border-radius: 50%; margin: 0 auto 15px; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 4px solid #ffffff; overflow: hidden; position: relative;}
+        .logo-container img { width: 95%; height: 95%; object-fit: contain; }
+
+        .header h2 { font-family: var(--font-head); font-size: 20px; font-weight: 700; margin-bottom: 4px; text-shadow: 1px 2px 4px rgba(0,0,0,0.3); }
+        .header .subtitle { font-family: var(--font-fancy); font-size: 15px; color: #e0e0e0; margin-bottom: 10px; }
+        .user-status { font-family: var(--font-card); font-size: 14px; background: rgba(255,255,255,0.25); backdrop-filter: blur(5px); padding: 5px 16px; border-radius: 25px; display: inline-block; border: 1px solid rgba(255,255,255,0.4); font-weight: 600; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 25px 20px; flex-grow: 1; }
+
+        .card-3d {
+            border-radius: 25px; padding: 20px 12px; text-align: center; cursor: pointer; color: white; font-family: var(--font-subhead); font-weight: 700; font-size: 17px; transition: all 0.2s ease; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; user-select: none;
+        }
+        .bg-1 { background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); box-shadow: 0 8px 0 #d64d63, 0 12px 18px rgba(255, 117, 140, 0.4); }
+        .bg-2 { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); box-shadow: 0 8px 0 #4a0cb3, 0 12px 18px rgba(37, 117, 252, 0.4); }
+        .bg-3 { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); box-shadow: 0 8px 0 #0d7a71, 0 12px 18px rgba(56, 239, 125, 0.3); }
+        .bg-4 { background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%); box-shadow: 0 8px 0 #cc6b3d, 0 12px 18px rgba(255, 94, 98, 0.35); }
+        .bg-5 { background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%); box-shadow: 0 8px 0 #681ebb, 0 12px 18px rgba(142, 45, 226, 0.35); }
+        .bg-6 { background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); box-shadow: 0 8px 0 #008777, 0 12px 18px rgba(0, 176, 155, 0.35); }
+        .bg-7 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); box-shadow: 0 8px 0 #e5896e, 0 12px 18px rgba(253, 160, 133, 0.4); }
+
+        .card-3d:nth-child(7) { grid-column: 1 / -1; height: 120px; flex-direction: row; gap: 15px; }
+        .card-3d:nth-child(7) .card-icon { margin-bottom: 0; font-size: 35px; }
+
+        .card-3d:active { transform: translateY(6px); box-shadow: 0 2px 0 #aaa, 0 4px 8px rgba(0,0,0,0.15); }
+        .card-icon { font-size: 42px; margin-bottom: 12px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25)); }
+
+        .page { display: none; padding: 20px; animation: fadeIn 0.3s ease-out; flex-grow: 1; }
+        .page-title { font-family: var(--font-head); font-size: 24px; color: var(--primary-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 800; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn {
+            background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 40px; 
+            font-family: var(--font-body); font-size: 16px; font-weight: 700; cursor: pointer; width: 100%;
+            box-shadow: 0 7px 0 var(--primary-dark), 0 12px 20px rgba(92, 107, 192, 0.4);
+            transition: all 0.15s ease; display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+        }
+        .btn:active { transform: translateY(7px); box-shadow: 0 0px 0 var(--primary-dark), 0 4px 8px rgba(92, 107, 192, 0.4); margin-bottom: 7px; }
+
+        .btn-green { background: var(--success); box-shadow: 0 7px 0 var(--success-dark), 0 12px 20px rgba(46, 125, 50, 0.4); }
+        .btn-green:active { box-shadow: 0 0px 0 var(--success-dark), 0 4px 8px rgba(46, 125, 50, 0.4); }
+
+        .btn-back {
+            background: #eceff1; color: #37474f; margin-bottom: 20px; width: auto; padding: 10px 20px;
+            border-radius: 30px; font-family: var(--font-body); font-size: 15px; font-weight: 700; border: none; cursor: pointer;
+            box-shadow: 0 5px 0 #cfd8dc, 0 8px 15px rgba(0,0,0,0.1); transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-back:active { transform: translateY(5px); box-shadow: 0 0px 0 #cfd8dc, 0 3px 6px rgba(0,0,0,0.1); margin-bottom: 25px;}
+
+        .auth-container { padding: 30px 25px; display: none; }
+        .auth-title { font-family: var(--font-head); font-size: 26px; text-align: center; color: var(--primary-dark); margin-bottom: 25px; font-weight: 800;}
+        .input-group { margin-bottom: 18px; }
+        .input-group label { display: block; margin-bottom: 8px; font-family: var(--font-card); font-weight: 700; color: #455a64; font-size: 15px; }
+        .input-group input { width: 100%; padding: 14px 16px; border: 2px solid #cfd8dc; border-radius: 20px; font-family: var(--font-body); font-size: 15px; background: #fdfdfd; transition: 0.3s; }
+        .input-group input:focus { border-color: var(--primary); outline: none; background: #fff; }
+        .switch-auth { text-align: center; margin-top: 25px; color: var(--primary-dark); cursor: pointer; font-family: var(--font-card); font-weight: 700; font-size: 15px; text-decoration: underline; }
+
+        .list-item { 
+            background: linear-gradient(180deg, #ffffff 0%, #f4f6f9 100%); 
+            padding: 24px 20px; 
+            border-radius: 24px; 
+            margin-bottom: 25px; 
+            border: 2px solid #e0e6ed; 
+            border-bottom: 8px solid var(--primary); 
+            box-shadow: 0 10px 20px rgba(92, 107, 192, 0.18), inset 0 4px 0 #ffffff; 
+            transition: all 0.2s ease; 
+            position: relative; 
+        }
+        .list-item:active { transform: translateY(4px); border-bottom: 4px solid var(--primary); margin-bottom: 29px; }
+        .list-item h4 { font-family: var(--font-head); font-size: 21px; margin-bottom: 12px; color: var(--primary-dark); line-height: 1.4; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); font-weight: 700; }
+        
+        .media-preview { 
+            width: 100%; 
+            height: auto;
+            border-radius: 16px; 
+            margin-top: 12px; 
+            border: 1px solid #eee; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+        .media-preview:active { transform: scale(0.98); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 100; backdrop-filter: blur(4px); padding: 20px; }
+        .modal-card { background: white; width: 100%; max-width: 380px; border-radius: 30px; padding: 25px; text-align: center; animation: popIn 0.3s ease-out; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        
+        .image-lightbox { background: rgba(0,0,0,0.85); z-index: 200; backdrop-filter: blur(8px); }
+        .image-lightbox img { max-width: 100%; max-height: 85vh; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: contain; animation: popIn 0.25s ease-out; }
+        .close-lightbox { position: absolute; top: 25px; right: 25px; color: white; font-size: 35px; cursor: pointer; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+        @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-card h3 { font-family: var(--font-head); font-size: 22px; color: var(--primary-dark); margin-bottom: 12px; }
+        .modal-card p { font-family: var(--font-body); font-size: 15px; color: #455a64; margin-bottom: 25px; line-height: 1.6; }
+
+        .sync-loader { text-align: center; padding: 40px 20px; display: none; }
+        .sync-loader i { font-size: 40px; color: var(--primary); animation: spin 1s linear infinite; margin-bottom: 15px; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        .admin-sheet-settings { background: #fff3e0; padding: 20px; border-radius: 24px; margin: 20px; border: 2px dashed #ff9800; display: none; }
+        .admin-sheet-settings h3 { font-family: var(--font-subhead); font-size: 18px; color: #e65100; margin-bottom: 15px;}
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="header">
+        <div class="vidyamithram-title">വിദ്യാമിത്രം</div>
+        <div class="logo-container" id="logoContainer">
+            <img id="schoolLogo" src="https://cdn-icons-png.flaticon.com/512/167/167707.png" alt="Logo">
+        </div>
+        <h2>ജി.എൽ.പി.എസ് മുണ്ടേക്കരാട്</h2>
+        <div class="subtitle">വിദ്യാഭ്യാസ സംസ്കാരത്തിന്റെ കൈയൊപ്പ്</div>
+        <div class="user-status" id="userStatus">അതിഥി (Guest)</div>
+        <div style="margin-top: 15px;">
+            <button onclick="logout()" id="logoutBtn" style="display:none; background: #ff4757; color: white; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-family: var(--font-card); font-weight: 700; font-size: 13px; box-shadow: 0 4px 0 #c0392b; transition: all 0.1s;"><i class="fas fa-sign-out-alt"></i> ലോഗൗട്ട്</button>
+        </div>
+    </div>
+
+    <div id="login-page" class="auth-container" style="display: block;">
+        <div class="auth-title">ലോഗിൻ ചെയ്യുക</div>
+        <div class="input-group">
+            <label><i class="fas fa-user"></i> യൂസർ നെയിം</label>
+            <input type="text" id="loginUser" placeholder="യൂസർ നെയിം നൽകുക">
+        </div>
+        <div class="input-group">
+            <label><i class="fas fa-key"></i> പാസ്‌വേർഡ്</label>
+            <input type="password" id="loginPass" placeholder="പാസ്‌വേർഡ് നൽകുക">
+        </div>
+        <button class="btn" onclick="login()"><i class="fas fa-sign-in-alt"></i> ലോഗിൻ</button>
+        <div class="switch-auth" onclick="showAuth('signup')">അക്കൗണ്ട് ഇല്ലേ? ഇവിടെ രജിസ്റ്റർ ചെയ്യുക</div>
+    </div>
+
+    <div id="signup-page" class="auth-container">
+        <div class="auth-title">രജിസ്ട്രേഷൻ</div>
+        <div class="input-group">
+            <label>പേര് (Name)</label>
+            <input type="text" id="regFName" placeholder="പേര്">
+        </div>
+        <div class="input-group">
+            <label>യൂസർ നെയിം</label>
+            <input type="text" id="regUser" placeholder="ഉദാ: user123">
+        </div>
+        <div class="input-group">
+            <label>പാസ്‌വേർഡ്</label>
+            <input type="password" id="regPass" placeholder="പാസ്‌വേർഡ്">
+        </div>
+        <button class="btn" onclick="signup()"><i class="fas fa-user-plus"></i> രജിസ്റ്റർ ചെയ്യുക</button>
+        <div class="switch-auth" onclick="showAuth('login')">അക്കൗണ്ട് ഉണ്ടോ? ലോഗിൻ ചെയ്യുക</div>
+    </div>
+
+    <div id="home-page" class="page" style="display: none; padding: 0;">
+        
+        <div class="admin-sheet-settings" id="adminSheetSetup">
+            <div id="setupScriptBox">
+                <h3><i class="fas fa-database"></i> സെറ്റിങ്സ്</h3>
+                <p style="font-size: 13px; color: #555; margin-bottom: 10px; font-family: var(--font-card);">അഡ്മിൻ ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് URL താഴെ നൽകുക:</p>
+                <div class="input-group">
+                    <input type="text" id="scriptUrlInput" placeholder="Google Apps Script URL (Web App)">
+                </div>
+                
+                <p style="font-size: 13px; color: #555; margin-bottom: 10px; margin-top: 15px; font-family: var(--font-card);">പുതിയ ലോഗോയുടെ ഗൂഗിൾ ഡ്രൈവ് ലിങ്ക് താഴെ നൽകുക (ആവശ്യമെങ്കിൽ):</p>
+                <div class="input-group">
+                    <input type="text" id="logoUrlInput" placeholder="ലോഗോയുടെ ഗൂഗിൾ ഡ്രൈവ് ലിങ്ക്">
+                </div>
+                
+                <button class="btn btn-green" style="padding: 12px; font-size: 14px;" onclick="saveAdminSettings()"><i class="fas fa-save"></i> സെറ്റിങ്സ് സേവ് ചെയ്യുക</button>
+            </div>
+            
+            <div id="connectedScriptBox" style="display:none; text-align:center;">
+                <h3 style="color: #2e7d32;"><i class="fas fa-check-circle"></i> സെറ്റിങ്സ് സേവ് ചെയ്തു</h3>
+                <p style="font-size: 13px; color: #555; margin-bottom: 10px; font-family: var(--font-card);">ആപ്പ് ഡാറ്റാബേസുമായി വിജയകരമായി ബന്ധിപ്പിച്ചിരിക്കുന്നു.</p>
+                <button class="btn" style="background:#78909c; padding: 10px 15px; font-size:13px; width: auto; box-shadow: 0 4px 0 #546e7a;" onclick="editAdminSettings()"><i class="fas fa-edit"></i> മാറ്റുക (Edit)</button>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="card-3d bg-1" onclick="openSection('content-page', 'gallery')">
+                <div class="card-icon"><i class="fas fa-images"></i></div>
+                <div>ഫോട്ടോ ഗാലറി</div>
+            </div>
+            <div class="card-3d bg-2" onclick="openSection('content-page', 'news')">
+                <div class="card-icon"><i class="fas fa-newspaper"></i></div>
+                <div>സ്കൂൾ വാർത്തകൾ</div>
+            </div>
+            <div class="card-3d bg-3" onclick="openSection('content-page', 'salabham')">
+                <div class="card-icon"><i class="fas fa-book-reader"></i></div>
+                <div>ശലഭം പത്രം</div>
+            </div>
+            <div class="card-3d bg-4" onclick="openSection('content-page', 'shishuvani')">
+                <div class="card-icon"><i class="fas fa-microphone-alt"></i></div>
+                <div>ശിശുവാണി</div>
+            </div>
+            <div class="card-3d bg-5" onclick="openSection('content-page', 'lss')">
+                <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div>LSS പരിശീലനം</div>
+            </div>
+            <div class="card-3d bg-6" onclick="openSection('content-page', 'chodyamazha')">
+                <div class="card-icon"><i class="fas fa-question-circle"></i></div>
+                <div>ചോദ്യമഴ</div>
+            </div>
+            <div class="card-3d bg-7" onclick="openSection('content-page', 'winners')">
+                <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                <div>മത്സരങ്ങളിലെ വിജയികൾ</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content-page" class="page">
+        <button class="btn-back" onclick="goHome()"><i class="fas fa-arrow-left"></i> തിരികെ</button>
+        <div class="page-title" id="content-title"><i class="fas fa-folder"></i> വിവരങ്ങൾ</div>
+        
+        <div class="sync-loader" id="syncLoader">
+            <i class="fas fa-sync"></i>
+            <p style="font-family: var(--font-card); font-weight: bold; color: #555;">വിവരങ്ങൾ ലഭ്യമാക്കുന്നു...</p>
+        </div>
+
+        <div id="dynamic-content-list">
+            <!-- Content injected here via JS -->
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-overlay image-lightbox" id="imageLightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <img id="lightboxImg" src="" alt="Full view">
+</div>
+
+<div class="modal-overlay" id="iosModal" style="z-index: 150;">
+    <div class="modal-card" style="border-bottom: 5px solid #007aff;">
+        <h3 style="color: #007aff;"><i class="fab fa-apple"></i> ഐഫോണിൽ ഇൻസ്റ്റാൾ ചെയ്യാൻ</h3>
+        <p style="font-size: 15px; text-align: left; margin-top: 15px;">
+            1. താഴെ കാണുന്ന <b>Share</b> <i class="fas fa-external-link-alt"></i> ഐക്കണിൽ ക്ലിക്ക് ചെയ്യുക.<br><br>
+            2. അതിൽ <b>"Add to Home Screen"</b> <i class="fas fa-plus-square"></i> എന്നത് തിരഞ്ഞെടുക്കുക.
+        </p>
+        <button class="btn" style="background: #007aff; box-shadow: 0 5px 0 #005bb5; margin-top: 10px;" onclick="document.getElementById('iosModal').style.display='none'">മനസ്സിലായി (OK)</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="customModal">
+    <div class="modal-card">
+        <h3 id="modalTitle">അറിയിപ്പ്</h3>
+        <p id="modalMessage">സന്ദേശം ഇവിടെ വരും...</p>
+        <button class="btn" id="modalBtn" onclick="closeModal()">ശരി (OK)</button>
+    </div>
+</div>
+
+<script>
+    let currentUser = null;
+    let usersDB = JSON.parse(localStorage.getItem('usersDB')) || [];
+    let appScriptUrl = localStorage.getItem('googleAppScriptUrl') || '';
+    let savedLogo = localStorage.getItem('schoolLogoUrl') || null;
+    let sheetData = []; 
+
+    // Apply saved logo if exists
+    if(savedLogo) document.getElementById('schoolLogo').src = savedLogo;
+
+    // iOS Detection
+    function checkIOS() {
+        const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = ('standalone' in window.navigator) && (window.navigator.standalone);
+        if (isIos && !isStandalone) {
+            setTimeout(() => { document.getElementById('iosModal').style.display = 'flex'; }, 1500);
+        }
+    }
+    window.onload = checkIOS;
+
+    function showModal(title, msg, btnText = "ശരി") {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalMessage').innerText = msg;
+        document.getElementById('modalBtn').innerText = btnText;
+        document.getElementById('customModal').style.display = 'flex';
+    }
+
+    function closeModal() { document.getElementById('customModal').style.display = 'none'; }
+    
+    // Lightbox Controls
+    function openLightbox(src) {
+        document.getElementById('lightboxImg').src = src;
+        document.getElementById('imageLightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+        document.getElementById('imageLightbox').style.display = 'none';
+        document.getElementById('lightboxImg').src = '';
+    }
+
+    function showAuth(type) {
+        document.getElementById('login-page').style.display = type === 'login' ? 'block' : 'none';
+        document.getElementById('signup-page').style.display = type === 'signup' ? 'block' : 'none';
+        document.getElementById('home-page').style.display = 'none';
+        document.getElementById('content-page').style.display = 'none';
+    }
+
+    function login() {
+        const user = document.getElementById('loginUser').value.trim();
+        const pass = document.getElementById('loginPass').value.trim();
+
+        if(user === 'admin' && pass === 'admin123') {
+            currentUser = { username: 'admin', role: 'admin', firstName: 'അഡ്മിൻ' };
+            initApp(); return;
+        }
+
+        const foundUser = usersDB.find(u => u.username === user && u.password === pass);
+        if(foundUser) { currentUser = foundUser; initApp(); } 
+        else { showModal("ലോഗിൻ പരാജയപ്പെട്ടു", "തെറ്റായ യൂസർ നെയിം അല്ലെങ്കിൽ പാസ്‌വേർഡ്!"); }
+    }
+
+    function signup() {
+        const fname = document.getElementById('regFName').value.trim();
+        const user = document.getElementById('regUser').value.trim();
+        const pass = document.getElementById('regPass').value.trim();
+
+        if(!fname || !user || !pass) { showModal("ശ്രദ്ധിക്കുക", "എല്ലാ വിവരങ്ങളും നൽകുക!"); return; }
+        if(usersDB.find(u => u.username === user)) { showModal("പിശക്", "യൂസർ നെയിം നിലവിലുണ്ട്."); return; }
+
+        usersDB.push({ firstName: fname, username: user, password: pass, role: 'parent' });
+        localStorage.setItem('usersDB', JSON.stringify(usersDB));
+        showModal("വിജയം", "രജിസ്ട്രേഷൻ വിജയം! ലോഗിൻ ചെയ്യുക.");
+        showAuth('login');
+    }
+
+    function logout() {
+        currentUser = null;
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
+        document.getElementById('userStatus').innerHTML = "അതിഥി (Guest)";
+        document.getElementById('logoutBtn').style.display = 'none';
+        showAuth('login');
+    }
+
+    function updateAdminSheetUI() {
+        if(appScriptUrl || savedLogo) {
+            document.getElementById('setupScriptBox').style.display = 'none';
+            document.getElementById('connectedScriptBox').style.display = 'block';
+        } else {
+            document.getElementById('setupScriptBox').style.display = 'block';
+            document.getElementById('connectedScriptBox').style.display = 'none';
+        }
+    }
+
+    function editAdminSettings() {
+        document.getElementById('setupScriptBox').style.display = 'block';
+        document.getElementById('connectedScriptBox').style.display = 'none';
+        document.getElementById('scriptUrlInput').value = appScriptUrl;
+        
+        let displayLogoUrl = savedLogo || '';
+        // If it's a formatted drive link, attempt to reverse format it for the input box for clarity
+        if(displayLogoUrl.includes('drive.google.com/uc?export=view&id=')) {
+            const id = displayLogoUrl.split('&id=')[1];
+            displayLogoUrl = `https://drive.google.com/file/d/${id}/view`;
+        }
+        document.getElementById('logoUrlInput').value = displayLogoUrl;
+    }
+
+    function initApp() {
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('signup-page').style.display = 'none';
+        document.getElementById('home-page').style.display = 'block';
+        document.getElementById('userStatus').innerHTML = `👋 സ്വാഗതം, ${currentUser.firstName}`;
+        document.getElementById('logoutBtn').style.display = 'inline-block';
+        
+        if(currentUser.role === 'admin') {
+            document.getElementById('adminSheetSetup').style.display = 'block';
+            updateAdminSheetUI();
+        } else {
+            document.getElementById('adminSheetSetup').style.display = 'none';
+        }
+
+        if(appScriptUrl) { fetchFromSheet(); }
+    }
+
+    function saveAdminSettings() {
+        const url = document.getElementById('scriptUrlInput').value.trim();
+        const logoUrlRaw = document.getElementById('logoUrlInput').value.trim();
+        
+        if(!url) { showModal("പിശക്", "ആപ്പ് സ്ക്രിപ്റ്റ് URL നൽകുക!"); return; }
+        
+        localStorage.setItem('googleAppScriptUrl', url);
+        appScriptUrl = url;
+        
+        if(logoUrlRaw) {
+            const formattedLogo = formatDriveImage(logoUrlRaw);
+            localStorage.setItem('schoolLogoUrl', formattedLogo);
+            savedLogo = formattedLogo;
+            document.getElementById('schoolLogo').src = formattedLogo;
+        } else {
+            // Optional: reset to default if left blank
+            localStorage.removeItem('schoolLogoUrl');
+            savedLogo = null;
+            document.getElementById('schoolLogo').src = "https://cdn-icons-png.flaticon.com/512/167/167707.png";
+        }
+
+        showModal("വിജയം", "സെറ്റിങ്സ് വിജയകരമായി സേവ് ചെയ്തു!");
+        updateAdminSheetUI();
+        fetchFromSheet();
+    }
+
+    function goHome() {
+        document.getElementById('content-page').style.display = 'none';
+        document.getElementById('home-page').style.display = 'block';
+    }
+
+    function formatDriveImage(link) {
+        if(link.includes('drive.google.com/file/d/')) {
+            const id = link.split('/d/')[1].split('/')[0];
+            return `https://drive.google.com/uc?export=view&id=${id}`;
+        }
+        return link; 
+    }
+
+    function openSection(pageId, category) {
+        document.getElementById('home-page').style.display = 'none';
+        document.getElementById(pageId).style.display = 'block';
+        
+        let titles = {
+            'gallery': '<i class="fas fa-images"></i> ഫോട്ടോ ഗാലറി',
+            'news': '<i class="fas fa-newspaper"></i> സ്കൂൾ വാർത്തകൾ',
+            'salabham': '<i class="fas fa-book-reader"></i> ശലഭം പത്രം',
+            'shishuvani': '<i class="fas fa-microphone-alt"></i> ശിശുവാണി',
+            'lss': '<i class="fas fa-graduation-cap"></i> LSS പരിശീലനം',
+            'chodyamazha': '<i class="fas fa-question-circle"></i> ചോദ്യമഴ',
+            'winners': '<i class="fas fa-trophy"></i> മത്സരങ്ങളിലെ വിജയികൾ'
+        };
+        
+        document.getElementById('content-title').innerHTML = titles[category] || '<i class="fas fa-folder"></i> വിവരങ്ങൾ';
+        renderCategoryContent(category);
+    }
+
+    function fetchFromSheet() {
+        if(!appScriptUrl) return;
+        fetch(appScriptUrl)
+            .then(res => res.json())
+            .then(data => { sheetData = data; })
+            .catch(err => console.error(err));
+    }
+
+    function renderCategoryContent(category) {
+        const container = document.getElementById('dynamic-content-list');
+        const loader = document.getElementById('syncLoader');
+        container.innerHTML = '';
+
+        if(!appScriptUrl) {
+            container.innerHTML = `<div style="text-align:center; padding: 20px; color: #ff5252;"><b>അഡ്മിൻ ഗൂഗിൾ ഷീറ്റ് ബന്ധിപ്പിച്ചിട്ടില്ല!</b></div>`;
+            return;
+        }
+
+        if(sheetData.length === 0) {
+            loader.style.display = 'block';
+            fetch(appScriptUrl)
+                .then(res => res.json())
+                .then(data => { 
+                    sheetData = data; 
+                    loader.style.display = 'none'; 
+                    displayItems(category, container);
+                })
+                .catch(err => {
+                    loader.style.display = 'none';
+                    container.innerHTML = `<div style="text-align:center; padding: 20px; color: #ff5252;">വിവരങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.</div>`;
+                });
+        } else {
+            displayItems(category, container);
+        }
+    }
+
+    function displayItems(category, container) {
+        const filtered = sheetData.filter(item => item.category && item.category.toString().toLowerCase().trim() === category);
+        
+        if(filtered.length === 0) {
+            container.innerHTML = `<div style="text-align:center; padding: 30px 10px; color: #78909c;"><i class="fas fa-folder-open" style="font-size: 40px; margin-bottom:10px;"></i><br><b>വിവരങ്ങൾ ലഭ്യമല്ല!</b></div>`;
+            return;
+        }
+
+        let html = '';
+        for(let i = filtered.length - 1; i >= 0; i--) {
+            let item = filtered[i];
+            let linkHTML = '';
+            
+            if(item.link && item.link.trim() !== '') {
+                if(category === 'gallery' || (category === 'winners' && item.link.includes('drive.google.com/file/d/'))) {
+                    let imgSrc = formatDriveImage(item.link);
+                    linkHTML = `<img src="${imgSrc}" class="media-preview" alt="Image" onclick="openLightbox('${imgSrc}')">`;
+                } else if(category === 'shishuvani') {
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-play-circle"></i> പ്ലേ ചെയ്യുക / കാണുക</button></a>`;
+                } else if(category === 'salabham') {
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-book-open"></i> പത്രം വായിക്കുക</button></a>`;
+                } else if(category === 'chodyamazha') {
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-pen-alt"></i> ക്വിസ് ആരംഭിക്കുക</button></a>`;
+                } else if(category === 'winners') {
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-trophy"></i> ഫലം കാണുക</button></a>`;
+                } else {
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-external-link-alt"></i> കാണുക / വായിക്കുക</button></a>`;
+                }
+            }
+
+            html += `
+                <div class="list-item" style="animation: fadeIn 0.4s;">
+                    <h4>${item.title || 'വിവരണം ലഭ്യമല്ല'}</h4>
+                    ${linkHTML}
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
