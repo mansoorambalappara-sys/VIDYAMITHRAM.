@@ -37,11 +37,12 @@
             text-shadow: 2px 4px 0px #311b92, 0px 8px 15px rgba(0,0,0,0.4); margin-bottom: 15px; letter-spacing: 1px;
         }
 
-        .logo-container { width: 100px; height: 100px; background: white; border-radius: 50%; margin: 0 auto 15px; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 4px solid #ffffff; overflow: hidden; position: relative;}
-        .logo-container img { width: 95%; height: 95%; object-fit: contain; }
+        .logo-container { width: 90px; height: 90px; background: white; border-radius: 50%; margin: 0 auto 15px; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.3); border: 4px solid #ffffff; overflow: hidden; position: relative;}
+        .logo-container img { width: 100%; height: 100%; object-fit: cover; }
 
         .header h2 { font-family: var(--font-head); font-size: 20px; font-weight: 700; margin-bottom: 4px; text-shadow: 1px 2px 4px rgba(0,0,0,0.3); }
         .header .subtitle { font-family: var(--font-fancy); font-size: 15px; color: #e0e0e0; margin-bottom: 10px; }
+
         .user-status { font-family: var(--font-card); font-size: 14px; background: rgba(255,255,255,0.25); backdrop-filter: blur(5px); padding: 5px 16px; border-radius: 25px; display: inline-block; border: 1px solid rgba(255,255,255,0.4); font-weight: 600; }
 
         .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 25px 20px; flex-grow: 1; }
@@ -65,6 +66,7 @@
 
         .page { display: none; padding: 20px; animation: fadeIn 0.3s ease-out; flex-grow: 1; }
         .page-title { font-family: var(--font-head); font-size: 24px; color: var(--primary-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 800; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         .btn {
@@ -133,9 +135,6 @@
         .sync-loader { text-align: center; padding: 40px 20px; display: none; }
         .sync-loader i { font-size: 40px; color: var(--primary); animation: spin 1s linear infinite; margin-bottom: 15px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        .admin-sheet-settings { background: #fff3e0; padding: 20px; border-radius: 24px; margin: 20px; border: 2px dashed #ff9800; display: none; }
-        .admin-sheet-settings h3 { font-family: var(--font-subhead); font-size: 18px; color: #e65100; margin-bottom: 15px;}
     </style>
 </head>
 <body>
@@ -144,6 +143,7 @@
     <div class="header">
         <div class="vidyamithram-title">വിദ്യാമിത്രം</div>
         <div class="logo-container" id="logoContainer">
+            <!-- ലോഗോ ഇവിടെ തനിയെ വരും (താഴെ സ്ക്രിപ്റ്റിൽ നൽകണം) -->
             <img id="schoolLogo" src="https://cdn-icons-png.flaticon.com/512/167/167707.png" alt="Logo">
         </div>
         <h2>ജി.എൽ.പി.എസ് മുണ്ടേക്കരാട്</h2>
@@ -187,30 +187,6 @@
     </div>
 
     <div id="home-page" class="page" style="display: none; padding: 0;">
-        
-        <div class="admin-sheet-settings" id="adminSheetSetup">
-            <div id="setupScriptBox">
-                <h3><i class="fas fa-database"></i> സെറ്റിങ്സ്</h3>
-                <p style="font-size: 13px; color: #555; margin-bottom: 10px; font-family: var(--font-card);">അഡ്മിൻ ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് URL താഴെ നൽകുക:</p>
-                <div class="input-group">
-                    <input type="text" id="scriptUrlInput" placeholder="Google Apps Script URL (Web App)">
-                </div>
-                
-                <p style="font-size: 13px; color: #555; margin-bottom: 10px; margin-top: 15px; font-family: var(--font-card);">പുതിയ ലോഗോയുടെ ഗൂഗിൾ ഡ്രൈവ് ലിങ്ക് താഴെ നൽകുക (ആവശ്യമെങ്കിൽ):</p>
-                <div class="input-group">
-                    <input type="text" id="logoUrlInput" placeholder="ലോഗോയുടെ ഗൂഗിൾ ഡ്രൈവ് ലിങ്ക്">
-                </div>
-                
-                <button class="btn btn-green" style="padding: 12px; font-size: 14px;" onclick="saveAdminSettings()"><i class="fas fa-save"></i> സെറ്റിങ്സ് സേവ് ചെയ്യുക</button>
-            </div>
-            
-            <div id="connectedScriptBox" style="display:none; text-align:center;">
-                <h3 style="color: #2e7d32;"><i class="fas fa-check-circle"></i> സെറ്റിങ്സ് സേവ് ചെയ്തു</h3>
-                <p style="font-size: 13px; color: #555; margin-bottom: 10px; font-family: var(--font-card);">ആപ്പ് ഡാറ്റാബേസുമായി വിജയകരമായി ബന്ധിപ്പിച്ചിരിക്കുന്നു.</p>
-                <button class="btn" style="background:#78909c; padding: 10px 15px; font-size:13px; width: auto; box-shadow: 0 4px 0 #546e7a;" onclick="editAdminSettings()"><i class="fas fa-edit"></i> മാറ്റുക (Edit)</button>
-            </div>
-        </div>
-
         <div class="grid-container">
             <div class="card-3d bg-1" onclick="openSection('content-page', 'gallery')">
                 <div class="card-icon"><i class="fas fa-images"></i></div>
@@ -261,7 +237,7 @@
 
 <div class="modal-overlay image-lightbox" id="imageLightbox">
     <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-    <img id="lightboxImg" src="" alt="Full view">
+    <img id="lightboxImg" src="">
 </div>
 
 <div class="modal-overlay" id="iosModal" style="z-index: 150;">
@@ -284,14 +260,38 @@
 </div>
 
 <script>
+    // =========================================================================
+    // പ്രധാനപ്പെട്ട സെറ്റിങ്സ് (GitHub-ൽ ഹോസ്റ്റ് ചെയ്യുന്നതിന് മുൻപ് ഇവിടെ ലിങ്കുകൾ നൽകുക)
+    // =========================================================================
+    
+    // 1. നിങ്ങളുടെ ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് (Web App) URL ഇവിടെ കോപ്പി ചെയ്ത് പേസ്റ്റ് ചെയ്യുക:
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwK7MUUTRHVVw-tJPnVaBHpJBCgoh93xsa-5V2N1zvVUOA-la5oR-6j2EXjF82jEYTXlg/exec"; 
+    
+    // 2. പുതിയ ലോഗോയുടെ ഗൂഗിൾ ഡ്രൈവ് ലിങ്ക് ഇവിടെ നൽകുക (ഇല്ലെങ്കിൽ പഴയത് തന്നെ കിടക്കും):
+    const LOGO_DRIVE_LINK = "https://drive.google.com/file/d/1ztHPNQz21uElVO-bjZD9t-HE7SATQtxn/view?usp=drive_link"; 
+
+    // =========================================================================
+
     let currentUser = null;
     let usersDB = JSON.parse(localStorage.getItem('usersDB')) || [];
-    let appScriptUrl = localStorage.getItem('googleAppScriptUrl') || '';
-    let savedLogo = localStorage.getItem('schoolLogoUrl') || null;
     let sheetData = []; 
 
-    // Apply saved logo if exists
-    if(savedLogo) document.getElementById('schoolLogo').src = savedLogo;
+    // ലോഗോ അപ്ഡേറ്റ് ചെയ്യാനുള്ള ഫംഗ്ഷൻ
+    function formatDriveImage(link) {
+        if(link && link.includes('drive.google.com/file/d/')) {
+            const id = link.split('/d/')[1].split('/')[0];
+            return `https://drive.google.com/uc?export=view&id=${id}`;
+        }
+        return link; 
+    }
+
+    // സെറ്റ് ചെയ്ത ലോഗോ ലോഡ് ചെയ്യുക
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const logoImg = document.getElementById('schoolLogo');
+        if(LOGO_DRIVE_LINK && LOGO_DRIVE_LINK.trim() !== "") {
+            logoImg.src = formatDriveImage(LOGO_DRIVE_LINK);
+        }
+    });
 
     // iOS Detection
     function checkIOS() {
@@ -312,7 +312,6 @@
 
     function closeModal() { document.getElementById('customModal').style.display = 'none'; }
     
-    // Lightbox Controls
     function openLightbox(src) {
         document.getElementById('lightboxImg').src = src;
         document.getElementById('imageLightbox').style.display = 'flex';
@@ -366,30 +365,6 @@
         showAuth('login');
     }
 
-    function updateAdminSheetUI() {
-        if(appScriptUrl || savedLogo) {
-            document.getElementById('setupScriptBox').style.display = 'none';
-            document.getElementById('connectedScriptBox').style.display = 'block';
-        } else {
-            document.getElementById('setupScriptBox').style.display = 'block';
-            document.getElementById('connectedScriptBox').style.display = 'none';
-        }
-    }
-
-    function editAdminSettings() {
-        document.getElementById('setupScriptBox').style.display = 'block';
-        document.getElementById('connectedScriptBox').style.display = 'none';
-        document.getElementById('scriptUrlInput').value = appScriptUrl;
-        
-        let displayLogoUrl = savedLogo || '';
-        // If it's a formatted drive link, attempt to reverse format it for the input box for clarity
-        if(displayLogoUrl.includes('drive.google.com/uc?export=view&id=')) {
-            const id = displayLogoUrl.split('&id=')[1];
-            displayLogoUrl = `https://drive.google.com/file/d/${id}/view`;
-        }
-        document.getElementById('logoUrlInput').value = displayLogoUrl;
-    }
-
     function initApp() {
         document.getElementById('login-page').style.display = 'none';
         document.getElementById('signup-page').style.display = 'none';
@@ -397,53 +372,15 @@
         document.getElementById('userStatus').innerHTML = `👋 സ്വാഗതം, ${currentUser.firstName}`;
         document.getElementById('logoutBtn').style.display = 'inline-block';
         
-        if(currentUser.role === 'admin') {
-            document.getElementById('adminSheetSetup').style.display = 'block';
-            updateAdminSheetUI();
-        } else {
-            document.getElementById('adminSheetSetup').style.display = 'none';
+        // Load data in background automatically if URL is provided
+        if(APP_SCRIPT_URL && APP_SCRIPT_URL !== "ഇവിടെ_ലിങ്ക്_പേസ്റ്റ്_ചെയ്യുക") { 
+            fetchFromSheet(); 
         }
-
-        if(appScriptUrl) { fetchFromSheet(); }
-    }
-
-    function saveAdminSettings() {
-        const url = document.getElementById('scriptUrlInput').value.trim();
-        const logoUrlRaw = document.getElementById('logoUrlInput').value.trim();
-        
-        if(!url) { showModal("പിശക്", "ആപ്പ് സ്ക്രിപ്റ്റ് URL നൽകുക!"); return; }
-        
-        localStorage.setItem('googleAppScriptUrl', url);
-        appScriptUrl = url;
-        
-        if(logoUrlRaw) {
-            const formattedLogo = formatDriveImage(logoUrlRaw);
-            localStorage.setItem('schoolLogoUrl', formattedLogo);
-            savedLogo = formattedLogo;
-            document.getElementById('schoolLogo').src = formattedLogo;
-        } else {
-            // Optional: reset to default if left blank
-            localStorage.removeItem('schoolLogoUrl');
-            savedLogo = null;
-            document.getElementById('schoolLogo').src = "https://cdn-icons-png.flaticon.com/512/167/167707.png";
-        }
-
-        showModal("വിജയം", "സെറ്റിങ്സ് വിജയകരമായി സേവ് ചെയ്തു!");
-        updateAdminSheetUI();
-        fetchFromSheet();
     }
 
     function goHome() {
         document.getElementById('content-page').style.display = 'none';
         document.getElementById('home-page').style.display = 'block';
-    }
-
-    function formatDriveImage(link) {
-        if(link.includes('drive.google.com/file/d/')) {
-            const id = link.split('/d/')[1].split('/')[0];
-            return `https://drive.google.com/uc?export=view&id=${id}`;
-        }
-        return link; 
     }
 
     function openSection(pageId, category) {
@@ -459,17 +396,13 @@
             'chodyamazha': '<i class="fas fa-question-circle"></i> ചോദ്യമഴ',
             'winners': '<i class="fas fa-trophy"></i> മത്സരങ്ങളിലെ വിജയികൾ'
         };
-        
-        document.getElementById('content-title').innerHTML = titles[category] || '<i class="fas fa-folder"></i> വിവരങ്ങൾ';
+        document.getElementById('content-title').innerHTML = titles[category];
         renderCategoryContent(category);
     }
 
     function fetchFromSheet() {
-        if(!appScriptUrl) return;
-        fetch(appScriptUrl)
-            .then(res => res.json())
-            .then(data => { sheetData = data; })
-            .catch(err => console.error(err));
+        if(!APP_SCRIPT_URL || APP_SCRIPT_URL === "ഇവിടെ_ലിങ്ക്_പേസ്റ്റ്_ചെയ്യുക") return;
+        fetch(APP_SCRIPT_URL).then(res => res.json()).then(data => { sheetData = data; }).catch(err => console.error(err));
     }
 
     function renderCategoryContent(category) {
@@ -477,26 +410,34 @@
         const loader = document.getElementById('syncLoader');
         container.innerHTML = '';
 
-        if(!appScriptUrl) {
-            container.innerHTML = `<div style="text-align:center; padding: 20px; color: #ff5252;"><b>അഡ്മിൻ ഗൂഗിൾ ഷീറ്റ് ബന്ധിപ്പിച്ചിട്ടില്ല!</b></div>`;
+        // Check if URL is hardcoded correctly
+        if(!APP_SCRIPT_URL || APP_SCRIPT_URL === "ഇവിടെ_ലിങ്ക്_പേസ്റ്റ്_ചെയ്യുക") {
+            container.innerHTML = `<div style="text-align:center; padding: 20px; color: #d32f2f; background: #ffebee; border-radius: 15px; margin-top: 15px; line-height: 1.6;"><b><i class="fas fa-exclamation-triangle"></i> ഗൂഗിൾ ഷീറ്റ് ലിങ്ക് നൽകിയിട്ടില്ല!</b><br><span style="font-size: 14px;">HTML കോഡിൽ 'APP_SCRIPT_URL' എന്ന ഭാഗത്ത് നിങ്ങളുടെ ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് ലിങ്ക് നൽകിയ ശേഷം ഗിറ്റ്ഹബ്ബിൽ അപ്‌ലോഡ് ചെയ്യുക.</span></div>`;
             return;
         }
 
         if(sheetData.length === 0) {
             loader.style.display = 'block';
-            fetch(appScriptUrl)
-                .then(res => res.json())
-                .then(data => { 
-                    sheetData = data; 
-                    loader.style.display = 'none'; 
-                    displayItems(category, container);
-                })
-                .catch(err => {
-                    loader.style.display = 'none';
-                    container.innerHTML = `<div style="text-align:center; padding: 20px; color: #ff5252;">വിവരങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.</div>`;
-                });
+            fetch(appScriptUrl).then(res => res.json()).then(data => { 
+                sheetData = data; loader.style.display = 'none'; displayItems(category, container);
+            }).catch(err => {
+                loader.style.display = 'none';
+                container.innerHTML = `<div style="text-align:center; padding: 20px; color: #ff5252;">വിവരങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ഇന്റർനെറ്റ് പരിശോധിക്കുക.</div>`;
+            });
         } else {
             displayItems(category, container);
+        }
+    }
+
+    // പുതിയ ഫംഗ്ഷൻ: ചിത്രം ലോഡ് ആയില്ലെങ്കിൽ (ഉദാഹരണത്തിന് അത് PDF/Link ആണെങ്കിൽ) ബട്ടൺ ആക്കി മാറ്റാൻ
+    function handleImageError(imgElement, originalUrl) {
+        let a = document.createElement('a');
+        a.href = originalUrl;
+        a.target = "_blank";
+        a.style.textDecoration = "none";
+        a.innerHTML = `<button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-external-link-alt"></i> തുറന്നു കാണുക / വായിക്കുക</button>`;
+        if(imgElement && imgElement.parentNode) {
+            imgElement.parentNode.replaceChild(a, imgElement);
         }
     }
 
@@ -514,19 +455,21 @@
             let linkHTML = '';
             
             if(item.link && item.link.trim() !== '') {
-                if(category === 'gallery' || (category === 'winners' && item.link.includes('drive.google.com/file/d/'))) {
-                    let imgSrc = formatDriveImage(item.link);
-                    linkHTML = `<img src="${imgSrc}" class="media-preview" alt="Image" onclick="openLightbox('${imgSrc}')">`;
+                let url = item.link.trim();
+                let imgSrc = formatDriveImage(url);
+
+                // ഗാലറി, വാർത്തകൾ, വിജയികൾ എന്നിവയിൽ ഫോട്ടോ കാണിക്കാൻ ശ്രമിക്കുക
+                if(category === 'gallery' || category === 'news' || category === 'winners') {
+                    // ഫോട്ടോ വർക്ക് ചെയ്തില്ലെങ്കിൽ (onerror) അത് തനിയെ ഒരു ബട്ടൺ ആയി മാറും (PDF കളോ ബ്ലോഗ് ലിങ്കുകളോ ആണെങ്കിൽ)
+                    linkHTML = `<img src="${imgSrc}" class="media-preview" alt="Image" onclick="openLightbox('${imgSrc}')" onerror="handleImageError(this, '${url}')">`;
                 } else if(category === 'shishuvani') {
-                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-play-circle"></i> പ്ലേ ചെയ്യുക / കാണുക</button></a>`;
+                    linkHTML = `<a href="${url}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-play-circle"></i> പ്ലേ ചെയ്യുക / കേൾക്കുക</button></a>`;
                 } else if(category === 'salabham') {
-                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-book-open"></i> പത്രം വായിക്കുക</button></a>`;
+                    linkHTML = `<a href="${url}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-book-open"></i> പത്രം വായിക്കുക</button></a>`;
                 } else if(category === 'chodyamazha') {
-                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-pen-alt"></i> ക്വിസ് ആരംഭിക്കുക</button></a>`;
-                } else if(category === 'winners') {
-                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-trophy"></i> ഫലം കാണുക</button></a>`;
+                    linkHTML = `<a href="${url}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-pen-alt"></i> ക്വിസ് ആരംഭിക്കുക</button></a>`;
                 } else {
-                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-external-link-alt"></i> കാണുക / വായിക്കുക</button></a>`;
+                    linkHTML = `<a href="${url}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-external-link-alt"></i> കാണുക / വായിക്കുക</button></a>`;
                 }
             }
 
