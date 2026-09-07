@@ -57,9 +57,10 @@
         .bg-5 { background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%); box-shadow: 0 8px 0 #681ebb, 0 12px 18px rgba(142, 45, 226, 0.35); }
         .bg-6 { background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); box-shadow: 0 8px 0 #008777, 0 12px 18px rgba(0, 176, 155, 0.35); }
         .bg-7 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); box-shadow: 0 8px 0 #e5896e, 0 12px 18px rgba(253, 160, 133, 0.4); }
-
-        .card-3d:nth-child(7) { grid-column: 1 / -1; height: 120px; flex-direction: row; gap: 15px; }
-        .card-3d:nth-child(7) .card-icon { margin-bottom: 0; font-size: 35px; }
+        /* പുതിയ 3 കാർഡുകൾക്കുമുള്ള നിറങ്ങൾ */
+        .bg-8 { background: linear-gradient(135deg, #36D1DC 0%, #5B86E5 100%); box-shadow: 0 8px 0 #289da6, 0 12px 18px rgba(54, 209, 220, 0.4); }
+        .bg-9 { background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); box-shadow: 0 8px 0 #c43922, 0 12px 18px rgba(255, 81, 47, 0.4); }
+        .bg-10 { background: linear-gradient(135deg, #FDC830 0%, #F37335 100%); box-shadow: 0 8px 0 #c79e26, 0 12px 18px rgba(253, 200, 48, 0.4); }
 
         .card-3d:active { transform: translateY(6px); box-shadow: 0 2px 0 #aaa, 0 4px 8px rgba(0,0,0,0.15); }
         .card-icon { font-size: 42px; margin-bottom: 12px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.25)); }
@@ -143,7 +144,6 @@
     <div class="header">
         <div class="vidyamithram-title">വിദ്യാമിത്രം</div>
         <div class="logo-container" id="logoContainer">
-            <!-- ലോഗോ ഇവിടെ തനിയെ വരും (താഴെ സ്ക്രിപ്റ്റിൽ നൽകണം) -->
             <img id="schoolLogo" src="https://cdn-icons-png.flaticon.com/512/167/167707.png" alt="Logo">
         </div>
         <h2>ജി.എൽ.പി.എസ് മുണ്ടേക്കരാട്</h2>
@@ -154,6 +154,7 @@
         </div>
     </div>
 
+    <!-- Auth Pages -->
     <div id="login-page" class="auth-container" style="display: block;">
         <div class="auth-title">ലോഗിൻ ചെയ്യുക</div>
         <div class="input-group">
@@ -186,6 +187,7 @@
         <div class="switch-auth" onclick="showAuth('login')">അക്കൗണ്ട് ഉണ്ടോ? ലോഗിൻ ചെയ്യുക</div>
     </div>
 
+    <!-- Home Page -->
     <div id="home-page" class="page" style="display: none; padding: 0;">
         <div class="grid-container">
             <div class="card-3d bg-1" onclick="openSection('content-page', 'gallery')">
@@ -212,6 +214,20 @@
                 <div class="card-icon"><i class="fas fa-question-circle"></i></div>
                 <div>ചോദ്യമഴ</div>
             </div>
+            <!-- പുതിയ 3 ഭാഷാ ബട്ടണുകൾ -->
+            <div class="card-3d bg-8" onclick="openSection('content-page', 'smart_english')">
+                <div class="card-icon"><i class="fas fa-spell-check"></i></div>
+                <div>സ്മാർട്ട് ഇംഗ്ലീഷ്</div>
+            </div>
+            <div class="card-3d bg-9" onclick="openSection('content-page', 'easy_malayalam')">
+                <div class="card-icon"><i class="fas fa-book-reader"></i></div>
+                <div>ഈസി മലയാളം</div>
+            </div>
+            <div class="card-3d bg-10" onclick="openSection('content-page', 'arabic')">
+                <div class="card-icon"><i class="fas fa-globe-asia"></i></div>
+                <div>ബഹ്ജത്തുൽ അറബിയ്യ</div>
+            </div>
+            <!-- വിജയികൾ ബട്ടൺ -->
             <div class="card-3d bg-7" onclick="openSection('content-page', 'winners')">
                 <div class="card-icon"><i class="fas fa-trophy"></i></div>
                 <div>മത്സരങ്ങളിലെ വിജയികൾ</div>
@@ -219,6 +235,7 @@
         </div>
     </div>
 
+    <!-- Generic Content Page -->
     <div id="content-page" class="page">
         <button class="btn-back" onclick="goHome()"><i class="fas fa-arrow-left"></i> തിരികെ</button>
         <div class="page-title" id="content-title"><i class="fas fa-folder"></i> വിവരങ്ങൾ</div>
@@ -235,11 +252,13 @@
 
 </div>
 
+<!-- Full Size Image Lightbox -->
 <div class="modal-overlay image-lightbox" id="imageLightbox">
     <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
     <img id="lightboxImg" src="">
 </div>
 
+<!-- iOS Install Instruction Modal -->
 <div class="modal-overlay" id="iosModal" style="z-index: 150;">
     <div class="modal-card" style="border-bottom: 5px solid #007aff;">
         <h3 style="color: #007aff;"><i class="fab fa-apple"></i> ഐഫോണിൽ ഇൻസ്റ്റാൾ ചെയ്യാൻ</h3>
@@ -251,6 +270,7 @@
     </div>
 </div>
 
+<!-- Custom Message Modal -->
 <div class="modal-overlay" id="customModal">
     <div class="modal-card">
         <h3 id="modalTitle">അറിയിപ്പ്</h3>
@@ -260,38 +280,14 @@
 </div>
 
 <script>
-    // =========================================================================
-    // പ്രധാനപ്പെട്ട സെറ്റിങ്സ് (GitHub-ൽ ഹോസ്റ്റ് ചെയ്യുന്നതിന് മുൻപ് ഇവിടെ ലിങ്കുകൾ നൽകുക)
-    // =========================================================================
-    
-    // 1. നിങ്ങളുടെ ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് (Web App) URL ഇവിടെ കോപ്പി ചെയ്ത് പേസ്റ്റ് ചെയ്യുക:
-    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwK7MUUTRHVVw-tJPnVaBHpJBCgoh93xsa-5V2N1zvVUOA-la5oR-6j2EXjF82jEYTXlg/exec"; 
-    
-    // 2. പുതിയ ലോഗോയുടെ ഗൂഗിൾ ഡ്രൈവ് ലിങ്ക് ഇവിടെ നൽകുക (ഇല്ലെങ്കിൽ പഴയത് തന്നെ കിടക്കും):
-    const LOGO_DRIVE_LINK = "https://drive.google.com/file/d/1ztHPNQz21uElVO-bjZD9t-HE7SATQtxn/view?usp=drive_link"; 
-
-    // =========================================================================
+    // ====================================================================
+    // IMPORTANT: ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് URL ഇവിടെ പേസ്റ്റ് ചെയ്യുക
+    const APP_SCRIPT_URL = "ഇവിടെ_ലിങ്ക്_പേസ്റ്റ്_ചെയ്യുക"; 
+    // ====================================================================
 
     let currentUser = null;
     let usersDB = JSON.parse(localStorage.getItem('usersDB')) || [];
     let sheetData = []; 
-
-    // ലോഗോ അപ്ഡേറ്റ് ചെയ്യാനുള്ള ഫംഗ്ഷൻ
-    function formatDriveImage(link) {
-        if(link && link.includes('drive.google.com/file/d/')) {
-            const id = link.split('/d/')[1].split('/')[0];
-            return `https://drive.google.com/uc?export=view&id=${id}`;
-        }
-        return link; 
-    }
-
-    // സെറ്റ് ചെയ്ത ലോഗോ ലോഡ് ചെയ്യുക
-    window.addEventListener('DOMContentLoaded', (event) => {
-        const logoImg = document.getElementById('schoolLogo');
-        if(LOGO_DRIVE_LINK && LOGO_DRIVE_LINK.trim() !== "") {
-            logoImg.src = formatDriveImage(LOGO_DRIVE_LINK);
-        }
-    });
 
     // iOS Detection
     function checkIOS() {
@@ -312,6 +308,7 @@
 
     function closeModal() { document.getElementById('customModal').style.display = 'none'; }
     
+    // Lightbox Controls
     function openLightbox(src) {
         document.getElementById('lightboxImg').src = src;
         document.getElementById('imageLightbox').style.display = 'flex';
@@ -371,8 +368,7 @@
         document.getElementById('home-page').style.display = 'block';
         document.getElementById('userStatus').innerHTML = `👋 സ്വാഗതം, ${currentUser.firstName}`;
         document.getElementById('logoutBtn').style.display = 'inline-block';
-        
-        // Load data in background automatically if URL is provided
+
         if(APP_SCRIPT_URL && APP_SCRIPT_URL !== "ഇവിടെ_ലിങ്ക്_പേസ്റ്റ്_ചെയ്യുക") { 
             fetchFromSheet(); 
         }
@@ -381,6 +377,34 @@
     function goHome() {
         document.getElementById('content-page').style.display = 'none';
         document.getElementById('home-page').style.display = 'block';
+    }
+
+    function formatDriveImage(link) {
+        if(link.includes('drive.google.com/file/d/')) {
+            const id = link.split('/d/')[1].split('/')[0];
+            return `https://drive.google.com/uc?export=view&id=${id}`;
+        }
+        return link; 
+    }
+
+    // ഫോട്ടോ ആവാത്ത ലിങ്കുകൾക്ക് (PDF, Games, Web links) ബട്ടൺ നൽകാനുള്ള സ്മാർട്ട് സംവിധാനം
+    function handleImageError(imgElement, originalUrl, category) {
+        let btnText = '<i class="fas fa-external-link-alt"></i> തുറന്നു കാണുക / വായിക്കുക';
+        
+        // ഭാഷാ ഗെയിമുകൾക്ക് പ്രത്യേക ബട്ടൺ
+        if(['smart_english', 'easy_malayalam', 'arabic'].includes(category)) {
+            btnText = '<i class="fas fa-gamepad"></i> ഗെയിം കളിക്കുക / തുറക്കുക';
+        }
+
+        let a = document.createElement('a');
+        a.href = originalUrl;
+        a.target = "_blank";
+        a.style.textDecoration = "none";
+        a.innerHTML = `<button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;">${btnText}</button>`;
+        
+        if(imgElement && imgElement.parentNode) {
+            imgElement.parentNode.replaceChild(a, imgElement);
+        }
     }
 
     function openSection(pageId, category) {
@@ -394,7 +418,10 @@
             'shishuvani': '<i class="fas fa-microphone-alt"></i> ശിശുവാണി',
             'lss': '<i class="fas fa-graduation-cap"></i> LSS പരിശീലനം',
             'chodyamazha': '<i class="fas fa-question-circle"></i> ചോദ്യമഴ',
-            'winners': '<i class="fas fa-trophy"></i> മത്സരങ്ങളിലെ വിജയികൾ'
+            'winners': '<i class="fas fa-trophy"></i> മത്സരങ്ങളിലെ വിജയികൾ',
+            'smart_english': '<i class="fas fa-spell-check"></i> സ്മാർട്ട് ഇംഗ്ലീഷ്',
+            'easy_malayalam': '<i class="fas fa-book-reader"></i> ഈസി മലയാളം',
+            'arabic': '<i class="fas fa-globe-asia"></i> ബഹ്ജത്തുൽ അറബിയ്യ'
         };
         document.getElementById('content-title').innerHTML = titles[category];
         renderCategoryContent(category);
@@ -410,7 +437,6 @@
         const loader = document.getElementById('syncLoader');
         container.innerHTML = '';
 
-        // Check if URL is hardcoded correctly
         if(!APP_SCRIPT_URL || APP_SCRIPT_URL === "ഇവിടെ_ലിങ്ക്_പേസ്റ്റ്_ചെയ്യുക") {
             container.innerHTML = `<div style="text-align:center; padding: 20px; color: #d32f2f; background: #ffebee; border-radius: 15px; margin-top: 15px; line-height: 1.6;"><b><i class="fas fa-exclamation-triangle"></i> ഗൂഗിൾ ഷീറ്റ് ലിങ്ക് നൽകിയിട്ടില്ല!</b><br><span style="font-size: 14px;">HTML കോഡിൽ 'APP_SCRIPT_URL' എന്ന ഭാഗത്ത് നിങ്ങളുടെ ഗൂഗിൾ ആപ്പ് സ്ക്രിപ്റ്റ് ലിങ്ക് നൽകിയ ശേഷം ഗിറ്റ്ഹബ്ബിൽ അപ്‌ലോഡ് ചെയ്യുക.</span></div>`;
             return;
@@ -418,7 +444,7 @@
 
         if(sheetData.length === 0) {
             loader.style.display = 'block';
-            fetch(appScriptUrl).then(res => res.json()).then(data => { 
+            fetch(APP_SCRIPT_URL).then(res => res.json()).then(data => { 
                 sheetData = data; loader.style.display = 'none'; displayItems(category, container);
             }).catch(err => {
                 loader.style.display = 'none';
@@ -426,18 +452,6 @@
             });
         } else {
             displayItems(category, container);
-        }
-    }
-
-    // പുതിയ ഫംഗ്ഷൻ: ചിത്രം ലോഡ് ആയില്ലെങ്കിൽ (ഉദാഹരണത്തിന് അത് PDF/Link ആണെങ്കിൽ) ബട്ടൺ ആക്കി മാറ്റാൻ
-    function handleImageError(imgElement, originalUrl) {
-        let a = document.createElement('a');
-        a.href = originalUrl;
-        a.target = "_blank";
-        a.style.textDecoration = "none";
-        a.innerHTML = `<button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-external-link-alt"></i> തുറന്നു കാണുക / വായിക്കുക</button>`;
-        if(imgElement && imgElement.parentNode) {
-            imgElement.parentNode.replaceChild(a, imgElement);
         }
     }
 
@@ -453,23 +467,42 @@
         for(let i = filtered.length - 1; i >= 0; i--) {
             let item = filtered[i];
             let linkHTML = '';
+            let gameBtnHTML = '';
+            
+            // ഗെയിം ലിങ്ക് നൽകിയിട്ടുണ്ടെങ്കിൽ ഗെയിം ബട്ടൺ അല്ലെങ്കിൽ ഇൻലൈൻ ഗെയിം ഉണ്ടാക്കുന്നു
+            if(item.gamelink && item.gamelink.trim() !== '') {
+                let gLink = item.gamelink.trim();
+                
+                // .html ഫയൽ ആണെങ്കിലോ അല്ലെങ്കിൽ embed link ആണെങ്കിലോ ആപ്പിൽ തന്നെ (iframe ആയി) കളിക്കാൻ പാകത്തിൽ
+                if(gLink.endsWith('.html') || gLink.includes('wordwall.net/embed') || gLink.includes('scratch.mit.edu/projects/') || gLink.includes('h5p')) {
+                    gameBtnHTML = `
+                        <div style="margin-top: 15px; width: 100%; border-radius: 12px; overflow: hidden; border: 2px solid #ff9800; box-shadow: 0 4px 8px rgba(255, 152, 0, 0.2);">
+                            <div style="background: #ff9800; color: white; padding: 8px 12px; font-size: 14px; font-weight: bold; text-align: center; font-family: var(--font-card);">
+                                <i class="fas fa-gamepad"></i> താഴെ ഗെയിം കളിക്കാം
+                            </div>
+                            <iframe src="${gLink}" width="100%" height="350px" style="border:none; display:block;" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                        </div>
+                    `;
+                } else {
+                    // സാധാരണ വെബ്സൈറ്റ് ലിങ്ക് ആണെങ്കിൽ ബട്ടൺ കാണിക്കുക
+                    gameBtnHTML = `<div style="margin-top: 15px;"><a href="${gLink}" target="_blank" style="text-decoration:none;"><button class="btn" style="background: #ff9800; box-shadow: 0 5px 0 #e65100; font-size: 15px; padding: 12px 18px; width:100%;"><i class="fas fa-gamepad"></i> ഇന്ററാക്ടീവ് ഗെയിം കളിക്കുക (പുതിയ പേജിൽ)</button></a></div>`;
+                }
+            }
             
             if(item.link && item.link.trim() !== '') {
-                let url = item.link.trim();
-                let imgSrc = formatDriveImage(url);
-
-                // ഗാലറി, വാർത്തകൾ, വിജയികൾ എന്നിവയിൽ ഫോട്ടോ കാണിക്കാൻ ശ്രമിക്കുക
-                if(category === 'gallery' || category === 'news' || category === 'winners') {
-                    // ഫോട്ടോ വർക്ക് ചെയ്തില്ലെങ്കിൽ (onerror) അത് തനിയെ ഒരു ബട്ടൺ ആയി മാറും (PDF കളോ ബ്ലോഗ് ലിങ്കുകളോ ആണെങ്കിൽ)
-                    linkHTML = `<img src="${imgSrc}" class="media-preview" alt="Image" onclick="openLightbox('${imgSrc}')" onerror="handleImageError(this, '${url}')">`;
+                // ഫോട്ടോ കാണിക്കാവുന്ന കാറ്റഗറികൾ (പുതിയ ഭാഷാ കാറ്റഗറികളും ഉൾപ്പെടുത്തി)
+                if(['gallery', 'news', 'winners', 'smart_english', 'easy_malayalam', 'arabic'].includes(category)) {
+                    let imgSrc = formatDriveImage(item.link);
+                    linkHTML = `<img src="${imgSrc}" class="media-preview" alt="Image" onclick="openLightbox('${imgSrc}')" onerror="handleImageError(this, '${item.link}', '${category}')">`;
+                
                 } else if(category === 'shishuvani') {
-                    linkHTML = `<a href="${url}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-play-circle"></i> പ്ലേ ചെയ്യുക / കേൾക്കുക</button></a>`;
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-play-circle"></i> പ്ലേ ചെയ്യുക / കാണുക</button></a>`;
                 } else if(category === 'salabham') {
-                    linkHTML = `<a href="${url}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-book-open"></i> പത്രം വായിക്കുക</button></a>`;
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-book-open"></i> പത്രം വായിക്കുക</button></a>`;
                 } else if(category === 'chodyamazha') {
-                    linkHTML = `<a href="${url}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-pen-alt"></i> ക്വിസ് ആരംഭിക്കുക</button></a>`;
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-pen-alt"></i> ക്വിസ് ആരംഭിക്കുക</button></a>`;
                 } else {
-                    linkHTML = `<a href="${url}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-external-link-alt"></i> കാണുക / വായിക്കുക</button></a>`;
+                    linkHTML = `<a href="${item.link}" target="_blank" style="text-decoration:none;"><button class="btn btn-green" style="margin-top: 15px; font-size: 14px; padding: 12px 18px; width:auto;"><i class="fas fa-external-link-alt"></i> കാണുക / വായിക്കുക</button></a>`;
                 }
             }
 
@@ -477,6 +510,7 @@
                 <div class="list-item" style="animation: fadeIn 0.4s;">
                     <h4>${item.title || 'വിവരണം ലഭ്യമല്ല'}</h4>
                     ${linkHTML}
+                    ${gameBtnHTML}
                 </div>
             `;
         }
