@@ -134,14 +134,14 @@
         .magazine-header { display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 15px; }
         @media (max-width: 500px) {
             .magazine-header { flex-direction: column-reverse; }
-            .magazine-img-container { width: 100% !important; height: 200px !important; }
+            .magazine-img-container { width: 100% !important; height: 220px !important; }
         }
         .magazine-content { flex: 1; }
         .magazine-content h4 { font-size: 18px; color: var(--primary-dark); margin-bottom: 8px; line-height: 1.4; font-weight: 800; }
         .magazine-desc { font-size: 14px; color: #455a64; line-height: 1.6; font-weight: 400; margin-bottom: 10px; white-space: pre-line; background: #f8f9fc; padding: 12px; border-radius: 12px; border-left: 4px solid var(--primary); }
         
         .magazine-img-container { 
-            width: 140px; height: 140px; flex-shrink: 0; border-radius: 14px; overflow: hidden; 
+            width: 160px; height: 160px; flex-shrink: 0; border-radius: 14px; overflow: hidden; 
             border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.15); cursor: zoom-in; position: relative; background: #f0f0f0;
         }
         .magazine-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
@@ -496,6 +496,7 @@
         document.getElementById('subject-list').innerHTML = html;
     }
 
+    // Robust Google Drive Image Link Formatter
     function formatDriveImage(link) {
         if(!link) return '';
         link = link.trim();
@@ -503,11 +504,11 @@
             const parts = link.split('/d/');
             if(parts.length > 1) {
                 const id = parts[1].split('/')[0];
-                return `https://drive.google.com/uc?export=view&id=${id}`;
+                return `https://lh3.googleusercontent.com/d/${id}`;
             }
         } else if(link.includes('drive.google.com/open?id=')) {
             const id = link.split('open?id=')[1].split('&')[0];
-            return `https://drive.google.com/uc?export=view&id=${id}`;
+            return `https://lh3.googleusercontent.com/d/${id}`;
         }
         return link; 
     }
