@@ -528,6 +528,31 @@ button[type=submit]:active{transform:translateY(6px) scale(1)!important;box-shad
 .vm-toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);z-index:500;max-width:88vw;padding:10px 16px;border-radius:14px;background:#1e1b4b;color:#fff;font-weight:700;font-size:.85rem;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.4);animation:pop .3s both}
 .dt-date{font-size:.68rem!important;padding:2px 9px!important}
 </style>
+
+<style id="vm-v5">
+.dbtns{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px;margin-top:16px}
+.db{position:relative;overflow:hidden;display:flex;align-items:center;gap:8px;min-height:60px;padding:8px 10px;border-radius:20px;border:2px solid #fff;color:#fff;cursor:pointer;box-shadow:0 6px 0 var(--sd),0 12px 16px rgba(0,0,0,.22),inset 0 2px 0 rgba(255,255,255,.35);animation:pop .5s both,dbfloat 4s ease-in-out infinite}
+.dbs{--sd:#064e3b;background:linear-gradient(135deg,#34d399,#0f766e)}.dbp{--sd:#701a75;background:linear-gradient(135deg,#f472b6,#a21caf);animation-delay:.1s,-2s}
+.db::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);animation:shine 4s ease-in-out infinite}
+.dbp::after{animation-delay:1.5s}
+.db:active{transform:translateY(4px);box-shadow:0 2px 0 var(--sd)}
+.db-ico{flex:none;display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff,rgba(255,255,255,.7) 50%,rgba(0,0,0,.2));box-shadow:0 3px 0 rgba(0,0,0,.28),inset 0 -3px 5px rgba(0,0,0,.15)}
+.db-ico b{font-style:normal;font-weight:400;font-size:1.35rem;line-height:1;filter:drop-shadow(0 2px 1px rgba(0,0,0,.35));animation:ik-write 1.1s ease-in-out infinite alternate}
+.dbp .db-ico b{animation:ik-bounce 1.6s ease-in-out infinite}
+.db strong{display:block;font-weight:800;font-size:.95rem;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.db small{display:block;font-size:.6rem;font-weight:700;line-height:1.25;opacity:.95;margin-top:1px}
+.db>i{position:absolute;right:8px;top:4px;font-style:normal;font-size:.75rem;opacity:0;animation:ik-twinkle 1.8s ease-in-out infinite}
+@keyframes dbfloat{50%{translate:0 -3px}}
+.dq.st{background:linear-gradient(135deg,#bbf7d0,#a7f3d0 50%,#fde68a);box-shadow:0 8px 0 #059669,0 16px 26px rgba(6,78,59,.35)}
+.dq.pm{background:linear-gradient(135deg,#fbcfe8,#e9d5ff 55%,#bae6fd);box-shadow:0 8px 0 #a21caf,0 16px 26px rgba(112,26,117,.35)}
+.sp-title{text-align:center;font-weight:800;font-size:1.4rem;line-height:1.4;margin:12px 0 8px;color:#064e3b;animation:dqin .8s cubic-bezier(.2,1.5,.4,1) both}
+.pm .sp-title{color:#701a75}.sp-by{text-align:center;margin:-2px 0 10px;font-weight:700;color:#86198f}
+.sp-body{margin-top:10px;padding:16px;border-radius:18px;background:#fff;color:#1e293b;font-size:1.03rem;line-height:1.95;box-shadow:0 5px 0 rgba(0,0,0,.1);animation:dqin .9s .15s both}
+.sp-body.pm{text-align:center;font-size:1.1rem;line-height:2.05;color:#4a044e}
+.pl{display:block;animation:dqin .6s both;animation-delay:calc(var(--i)*.09s + .3s)}.pl.gap{height:.8em}
+.sp-moral{margin-top:12px;padding:14px;border-radius:18px;background:linear-gradient(135deg,#fb923c,#f59e0b);color:#fff;font-weight:800;line-height:1.6;box-shadow:0 5px 0 #b45309;animation:dqin .9s .5s both}.sp-moral span{font-weight:700}
+.dq-oldb{display:block;width:100%;text-align:left;padding:8px 10px;margin-top:8px;border:0;border-radius:12px;background:rgba(255,255,255,.8);cursor:pointer}.dq-oldb b{display:block;color:#4c1d95}
+</style>
 </head>
 <body>
 <script>
@@ -1067,6 +1092,7 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
                     document.querySelector('.vm-modal [data-act="view"]')?.addEventListener('click', ev => openLink(ev.currentTarget.dataset.url, ev.currentTarget.dataset.title));
                     document.querySelectorAll('.vm-modal [data-act="zoom"]').forEach(im => im.addEventListener('click', () => modal(`<img class="vm-zoom" src="${im.dataset.src}" alt="">`)));
                     return; }
+                if (e.target.closest('[data-act="soon"]')) { note('ഉടൻ വരും ✨'); return; }
                 const dqt = e.target.closest('[data-act="dq"]'); if (dqt) { openDaily(box._daily, dqt.dataset.k); return; }
                 const rv = e.target.closest('[data-act="reveal"]');
                 if (rv) { const d = rv.closest('.dq'); const open = d.classList.toggle('open'); rv.textContent = open ? 'ഉത്തരം മറയ്ക്കാം 🙈' : 'ഉത്തരം കാണാം 👀'; if (open) { pop(rv); sfx(true); } return; }
@@ -1098,21 +1124,22 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
         const fmtD = d => `${d.getDate()} ${ML_M[d.getMonth()]} ${d.getFullYear()} · ${ML_D[d.getDay()]}`;
         const sameDay = (a, b) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
         const dChip = (d, c = 'dq-date') => d ? `<span class="${c}">📅 ${fmtD(d)}</span>` : '';
-        function dailyList(rows, cat) {
+        function dailyList(rows, cat, n = 7) {
             const l = newest(rows.filter(r => catOf(r) === cat)).map(r => ({ r, d: parseD(r.link) })), t = new Date();
             let cur = l.find(x => x.d && sameDay(x.d, t)) || l[0];
-            const old = l.filter(x => x !== cur).slice(0, 7);
+            const old = l.filter(x => x !== cur).slice(0, n);
             if (cur && !cur.d) cur = { ...cur, d: t };   // no date typed in the sheet: show today's date
             return { cur, old, today: !!cur && sameDay(cur.d, t) };
         }
         function dailyQ(rows, box) {
-            const Q = dailyList(rows, 'daily_question'), W = dailyList(rows, 'word_of_the_day'); box._daily = { Q, W };
+            const Q = dailyList(rows, 'daily_question'), W = dailyList(rows, 'word_of_the_day'), S = dailyList(rows, 'kathamrutham', 30), P = dailyList(rows, 'kavyapookkal', 30); box._daily = { Q, W, S, P };
             const q = Q.cur, w = W.cur;
             const tq = q ? `<div class="dt dtq" data-act="dq" data-k="Q"><div class="dt-bg"><i>❓</i><i>💡</i><i>⭐</i></div><b class="dt-ico">💡</b><h4>ഒരു ദിനം<br>ഒരു ചോദ്യം</h4><p>${esc(q.r.title)}</p>${dChip(q.d, 'dt-date')}<em>ഉത്തരം കാണാം ▸</em></div>`
                 : `<div class="dt dtq"><b class="dt-ico">💡</b><h4>ഒരു ദിനം<br>ഒരു ചോദ്യം</h4><p>ഉടൻ വരും ✨</p></div>`;
             const tw = w ? `<div class="dt dtw" data-act="dq" data-k="W"><div class="dt-bg"><i>📚</i><i>🔤</i><i>🌈</i></div><b class="dt-ico">📖</b><h4>Word of the Day</h4><strong class="dt-word">${esc(w.r.title)}</strong>${dChip(w.d, 'dt-date')}<em>അർത്ഥം കാണാം ▸</em></div>`
                 : `<div class="dt dtw"><b class="dt-ico">📖</b><h4>Word of the Day</h4><p>ഉടൻ വരും ✨</p></div>`;
-            return `<section class="vm-layer"><div class="dtiles">${tq}${tw}</div></section>`;
+            const btn = (k, cls, ico, t, sub, L) => `<div class="db ${cls}" data-act="${L.cur ? 'dq' : 'soon'}" data-k="${k}"><i>✦</i><span class="db-ico"><b>${ico}</b></span><div><strong>${t}</strong><small>${sub}</small></div></div>`;
+            return `<section class="vm-layer"><div class="dtiles">${tq}${tw}</div><div class="dbtns">${btn('S', 'dbs', '🦉', 'കഥാമൃതം', 'ദിവസവും ഒരു ഗുണപാഠകഥ', S)}${btn('P', 'dbp', '🌸', 'കാവ്യപ്പൂക്കൾ', 'ദിവസവും ഒരു മലയാള കവിത', P)}</div></section>`;
         }
         /* Pronunciation: online voice files first (work inside Android WebView apps), phone's own voice as backup */
         let _a = null;
@@ -1141,7 +1168,27 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
             next();
         }
 
-        function openDaily(d, k) {
+        /* കഥാമൃതം (category kathamrutham: title=കഥയുടെ പേര് | content=കഥ ... "ഗുണപാഠം: ..." | imageUrl | link=തീയതി)
+           കാവ്യപ്പൂക്കൾ (category kavyapookkal: title=കവിതയുടെ പേര് | കവിയുടെ പേര് | content=കവിത | imageUrl | link=തീയതി) */
+        function storyPoem(d, k, idx) {
+            const L = d[k], items = [L.cur, ...L.old], it = items[idx] || items[0], r = it.r, isS = k === 'S';
+            const raw = String(r.content || ''), [t1, by] = String(r.title || '').split('|').map(x => x.trim());
+            const tag = (idx === 0 && L.today) ? (isS ? '🦉 ഇന്നത്തെ കഥ' : '🌸 ഇന്നത്തെ കവിത') : (isS ? '🦉 കഥ' : '🌸 കവിത');
+            let body;
+            if (isS) {
+                const mi = raw.search(/ഗുണപാഠം/), story = (mi >= 0 ? raw.slice(0, mi) : raw).trim(), moral = mi >= 0 ? raw.slice(mi).replace(/^ഗുണപാഠം\s*[:：\-–]?\s*/, '').trim() : '';
+                body = `<div class="sp-body">${nl(story)}</div>${moral ? `<div class="sp-moral">💡 ഗുണപാഠം<br><span>${nl(moral)}</span></div>` : ''}`;
+            } else {
+                body = `<div class="sp-body pm">${raw.split('\n').map((l, i) => l.trim() ? `<span class="pl" style="--i:${Math.min(i, 24)}">${esc(l)}</span>` : '<span class="pl gap"></span>').join('')}</div>`;
+            }
+            const others = items.map((o, i) => i === idx ? '' : `<button class="dq-oldb" data-act="old" data-i="${i}">${dChip(o.d, 'dq-date sm')}<b>${esc(String(o.r.title || '').split('|')[0])}</b></button>`).join('');
+            return `<div class="dq ${isS ? 'st' : 'pm'}"><div class="dq-bg">${isS ? '<i>🦉</i><i>📚</i><i>⭐</i><i>🌳</i><i>✨</i>' : '<i>🌸</i><i>🌼</i><i>🦋</i><i>🎵</i><i>✨</i>'}</div>
+                <div class="dq-tag" style="background:${isS ? 'linear-gradient(#10b981,#047857)' : 'linear-gradient(#d946ef,#a21caf)'};box-shadow:0 3px 0 ${isS ? '#064e3b' : '#701a75'}">${tag}</div>${dChip(it.d)}
+                <div class="sp-title">${esc(t1)}</div>${by ? `<div class="sp-by">— ${esc(by)}</div>` : ''}${strip(photosOf(r))}${body}
+                ${items.length > 1 ? `<details class="dq-old"><summary>മുമ്പത്തെ ${isS ? 'കഥകൾ' : 'കവിതകൾ'} (${items.length - 1})</summary>${others}</details>` : ''}</div>`;
+        }
+
+        function openDaily(d, k, idx = 0) {
             const bg = '<div class="dq-bg"><i>❓</i><i>💡</i><i>⭐</i><i>🤔</i><i>✨</i></div>';
             const older = (list, fmt) => list.length ? `<details class="dq-old"><summary>മുമ്പത്തെ ${k === 'Q' ? 'ചോദ്യങ്ങൾ' : 'വാക്കുകൾ'} (${list.length})</summary>${list.map(o => `<div>${dChip(o.d, 'dq-date sm')}${fmt(o.r)}</div>`).join('')}</details>` : '';
             let html;
@@ -1150,15 +1197,16 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
                 html = `<div class="dq">${bg}<div class="dq-tag">${today ? '🌞 ഇന്നത്തെ ചോദ്യം' : '🗓️ ചോദ്യം'}</div>${dChip(cur.d)}${strip(photosOf(q))}
                     <div class="dq-q">${nl(q.title)}</div><button class="dq-btn" data-act="reveal">ഉത്തരം കാണാം 👀</button>
                     <div class="dq-a"><span>✅ ഉത്തരം</span><strong>${nl(q.content)}</strong></div>${older(old, o => `<b>❓ ${esc(o.title)}</b><span>✅ ${esc(o.content)}</span>`)}</div>`;
-            } else {
+            } else if (k === 'W') {
                 const { cur, old } = d.W, w = cur.r, lines = String(w.content || '').split('\n'), ex = lines.slice(1).join('\n').trim();
                 html = `<div class="dq dw">${bg}<div class="dq-tag dw-tag">📖 Word of the Day</div>${dChip(cur.d)}
                     <div class="dw-word">${esc(w.title)}</div><button class="dq-btn dw-say" data-act="say" data-w="${esc(w.title)}">🔊 വാക്ക് കേൾക്കാം</button>${strip(photosOf(w))}
                     <div class="dq-a"><span>മലയാളം അർത്ഥം</span><strong>${esc(lines[0])}</strong></div>${ex ? `<div class="dw-ex">“${nl(ex)}”</div><button class="dq-btn dw-say" data-act="say" data-w="${esc(ex.replace(/\n/g, ' '))}">🔊 ഉദാഹരണം കേൾക്കാം</button>` : ''}
                     ${older(old, o => `<b>${esc(o.title)}</b><span>${esc(String(o.content || '').split('\n')[0])}</span>`)}</div>`;
-            }
+            } else html = storyPoem(d, k, idx);
             const m = modal(html);
             m.addEventListener('click', ev => {
+                const ob = ev.target.closest('[data-act="old"]'); if (ob) { m.remove(); openDaily(d, k, +ob.dataset.i); return; }
                 const rv = ev.target.closest('[data-act="reveal"]');
                 if (rv) { const open = rv.closest('.dq').classList.toggle('open'); rv.textContent = open ? 'ഉത്തരം മറയ്ക്കാം 🙈' : 'ഉത്തരം കാണാം 👀'; if (open) { pop(rv); sfx(true); } return; }
                 const sy = ev.target.closest('[data-act="say"]');
