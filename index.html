@@ -521,6 +521,13 @@ button[type=submit]:active{transform:translateY(6px) scale(1)!important;box-shad
 .vm-head .vm-ribbon{padding:0 12px 2px}.vm-head .vm-sub{font-size:.95rem;line-height:1.45}
 .vm-head .vm-gl{font-size:.54rem}
 </style>
+<style id="vm-tts">
+.dq-btn.busy{filter:brightness(1.15);animation:dqpulse .8s ease-in-out infinite!important}
+.dw-say+.dq-a,.dq-a+.dw-ex+.dw-say{margin-top:10px}
+.dw-ex+.dw-say{margin-top:10px}
+.vm-toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);z-index:500;max-width:88vw;padding:10px 16px;border-radius:14px;background:#1e1b4b;color:#fff;font-weight:700;font-size:.85rem;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.4);animation:pop .3s both}
+.dt-date{font-size:.68rem!important;padding:2px 9px!important}
+</style>
 </head>
 <body>
 <script>
@@ -1093,8 +1100,10 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
         const dChip = (d, c = 'dq-date') => d ? `<span class="${c}">📅 ${fmtD(d)}</span>` : '';
         function dailyList(rows, cat) {
             const l = newest(rows.filter(r => catOf(r) === cat)).map(r => ({ r, d: parseD(r.link) })), t = new Date();
-            const cur = l.find(x => x.d && sameDay(x.d, t)) || l[0];
-            return { cur, old: l.filter(x => x !== cur).slice(0, 7), today: !!cur && (!cur.d || sameDay(cur.d, t)) };
+            let cur = l.find(x => x.d && sameDay(x.d, t)) || l[0];
+            const old = l.filter(x => x !== cur).slice(0, 7);
+            if (cur && !cur.d) cur = { ...cur, d: t };   // no date typed in the sheet: show today's date
+            return { cur, old, today: !!cur && sameDay(cur.d, t) };
         }
         function dailyQ(rows, box) {
             const Q = dailyList(rows, 'daily_question'), W = dailyList(rows, 'word_of_the_day'); box._daily = { Q, W };
@@ -1105,6 +1114,33 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
                 : `<div class="dt dtw"><b class="dt-ico">📖</b><h4>Word of the Day</h4><p>ഉടൻ വരും ✨</p></div>`;
             return `<section class="vm-layer"><div class="dtiles">${tq}${tw}</div></section>`;
         }
+        /* Pronunciation: online voice files first (work inside Android WebView apps), phone's own voice as backup */
+        let _a = null;
+        function note(t) { const d = document.createElement('div'); d.className = 'vm-toast'; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 3000); }
+        function speakEN(text, btn) {
+            try { if (_a) { _a.pause(); _a = null; } if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {}
+            const q = encodeURIComponent(text);
+            const srcs = [`https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=${q}`, `https://dict.youdao.com/dictvoice?audio=${q}&type=2`];
+            const done = () => btn && btn.classList.remove('busy');
+            const synth = () => {
+                if (window.speechSynthesis) { const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = .85; u.onend = done; u.onerror = done; speechSynthesis.speak(u); }
+                else { done(); note('ശബ്ദം ലഭ്യമല്ല — ഇന്റർനെറ്റ് ഓൺ ആണോ എന്ന് നോക്കുക'); }
+            };
+            let i = 0;
+            const next = () => {
+                if (i >= srcs.length) return synth();
+                const a = new Audio(srcs[i++]); _a = a; let fired = false, started = false;
+                const fail = () => { if (fired) return; fired = true; clearTimeout(tm); next(); };
+                const tm = setTimeout(() => { if (!started) { try { a.pause(); } catch (e) {} fail(); } }, 5000);
+                a.onplaying = () => { started = true; clearTimeout(tm); };
+                a.onended = () => { done(); };
+                a.onerror = fail;
+                const pr = a.play(); if (pr && pr.catch) pr.catch(fail);
+            };
+            if (btn) btn.classList.add('busy');
+            next();
+        }
+
         function openDaily(d, k) {
             const bg = '<div class="dq-bg"><i>❓</i><i>💡</i><i>⭐</i><i>🤔</i><i>✨</i></div>';
             const older = (list, fmt) => list.length ? `<details class="dq-old"><summary>മുമ്പത്തെ ${k === 'Q' ? 'ചോദ്യങ്ങൾ' : 'വാക്കുകൾ'} (${list.length})</summary>${list.map(o => `<div>${dChip(o.d, 'dq-date sm')}${fmt(o.r)}</div>`).join('')}</details>` : '';
@@ -1117,8 +1153,8 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
             } else {
                 const { cur, old } = d.W, w = cur.r, lines = String(w.content || '').split('\n'), ex = lines.slice(1).join('\n').trim();
                 html = `<div class="dq dw">${bg}<div class="dq-tag dw-tag">📖 Word of the Day</div>${dChip(cur.d)}
-                    <div class="dw-word">${esc(w.title)}</div><button class="dq-btn dw-say" data-act="say" data-w="${esc(w.title)}">🔊 ഉച്ചാരണം കേൾക്കാം</button>${strip(photosOf(w))}
-                    <div class="dq-a"><span>മലയാളം അർത്ഥം</span><strong>${esc(lines[0])}</strong></div>${ex ? `<div class="dw-ex">“${nl(ex)}”</div>` : ''}
+                    <div class="dw-word">${esc(w.title)}</div><button class="dq-btn dw-say" data-act="say" data-w="${esc(w.title)}">🔊 വാക്ക് കേൾക്കാം</button>${strip(photosOf(w))}
+                    <div class="dq-a"><span>മലയാളം അർത്ഥം</span><strong>${esc(lines[0])}</strong></div>${ex ? `<div class="dw-ex">“${nl(ex)}”</div><button class="dq-btn dw-say" data-act="say" data-w="${esc(ex.replace(/\n/g, ' '))}">🔊 ഉദാഹരണം കേൾക്കാം</button>` : ''}
                     ${older(old, o => `<b>${esc(o.title)}</b><span>${esc(String(o.content || '').split('\n')[0])}</span>`)}</div>`;
             }
             const m = modal(html);
@@ -1126,7 +1162,7 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
                 const rv = ev.target.closest('[data-act="reveal"]');
                 if (rv) { const open = rv.closest('.dq').classList.toggle('open'); rv.textContent = open ? 'ഉത്തരം മറയ്ക്കാം 🙈' : 'ഉത്തരം കാണാം 👀'; if (open) { pop(rv); sfx(true); } return; }
                 const sy = ev.target.closest('[data-act="say"]');
-                if (sy && window.speechSynthesis) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(sy.dataset.w); u.lang = 'en-IN'; u.rate = .8; speechSynthesis.speak(u); return; }
+                if (sy) { speakEN(sy.dataset.w, sy); return; }
                 const z = ev.target.closest('[data-act="zoom"]'); if (z) modal(`<img class="vm-zoom" src="${z.dataset.src}" alt="">`);
             });
         }
@@ -1135,7 +1171,7 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
             const box = document.getElementById('home-body'); bindTab(box);
             if (!box._d) box.innerHTML = empty('⏳ ലോഡ് ചെയ്യുന്നു...');
             const rows = await loadRows(); box._d = 1;
-            const L = [['home_school', '🏫 നമ്മുടെ സ്കൂൾ', 1], ['home_programs', '🎉 കുട്ടികളുടെ പരിപാടികൾ', -1], ['home_notices', '📢 അറിയിപ്പുകൾ', 1]];
+            const L = [['home_school', '🏫 നമ്മുടെ സ്കൂൾ', 1], ['home_notices', '📢 അറിയിപ്പുകൾ', 1]];
             box._notes = [];
             const parts = L.map(([c, h, dir], k) => {
                 const rs = newest(rows.filter(r => catOf(r) === c)); let inner = '';
@@ -1146,7 +1182,7 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
                 }
                 return `<section class="vm-layer l${k}"><h3>${h}</h3>${inner ? `<div class="vm-roll" data-dir="${dir}">${inner}</div>` : empty('ഉടൻ ചേർക്കും ✨')}</section>`;
             });
-            parts.splice(2, 0, dailyQ(rows, box));
+            parts.splice(1, 0, dailyQ(rows, box));
             box.innerHTML = parts.join('');
             box.querySelectorAll('.vm-roll').forEach(autoRoll);
         }
@@ -1156,20 +1192,22 @@ window.ico3d=function(fa){var m={'fa-child':['🧒','bounce'],'fa-book':['📘',
             if (!box._d) box.innerHTML = empty('⏳ ലോഡ് ചെയ്യുന്നു...');
             const rows = await loadRows(); box._d = 1;
             const albums = new Map();
-            newest(rows.filter(r => catOf(r).startsWith('gallery_'))).forEach(r => {
-                const al = String(r.category).trim().slice(8).replace(/_/g, ' ') || 'Photos';
+            newest(rows.filter(r => catOf(r).startsWith('gallery_') || catOf(r) === 'home_programs')).forEach(r => {
+                const al = catOf(r) === 'home_programs' ? 'കുട്ടികളുടെ പരിപാടികൾ' : (String(r.category).trim().slice(8).replace(/_/g, ' ') || 'Photos');
                 if (!albums.has(al)) albums.set(al, []);
                 const ph = photosOf(r);
                 if (ph.length) ph.forEach(u => albums.get(al).push({ u, cap: r.title }));
                 else if (r.link) albums.get(al).push({ folder: 1, link: r.link, cap: r.title });
             });
             box._lbs = [];
-            const html = [...albums].map(([al, list], k) => {
+            const PR = 'കുട്ടികളുടെ പരിപാടികൾ';
+            const order = albums.has(PR) ? [[PR, albums.get(PR)], ...[...albums].filter(([k]) => k !== PR)] : [...albums];
+            const html = order.map(([al, list], k) => {
                 const pics = list.filter(x => !x.folder); box._lbs.push(pics); let pi = 0;
                 const tiles = list.map((x, i) => x.folder
                     ? `<div class="hp"><div class="fl" style="animation:none"><div class="ff gp fold" data-act="view" data-url="${esc(x.link)}" data-title="${esc(x.cap)}"><b>📁</b><span>${esc(x.cap)}</span></div></div></div>`
                     : flipTile(x, i + k * 2, `data-act="lb" data-a="${k}" data-i="${pi++}"`)).join('');
-                return `<section class="vm-layer"><h3>🖼️ ${esc(al)} <small>${list.length}</small></h3><div class="vm-roll" data-dir="${k % 2 ? -1 : 1}">${tiles}</div></section>`;
+                return `<section class="vm-layer"><h3>${al === PR ? '🎉' : '🖼️'} ${esc(al)} <small>${list.length}</small></h3><div class="vm-roll" data-dir="${k % 2 ? -1 : 1}">${tiles}</div></section>`;
             }).join('');
             box.innerHTML = html || empty('ഫോട്ടോകൾ ഉടൻ ചേർക്കും ✨');
             box.querySelectorAll('.vm-roll').forEach(autoRoll);
